@@ -1,0 +1,204 @@
+\documentclass[11pt,a4paper]{jlreq}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{情報科学基礎A 第3回 レポート}}
+\end{center}
+\vspace{1em}
+
+\begin{flushright}
+提出日：\today \\
+学籍番号：2611193 \\
+氏名：中井平蔵
+\end{flushright}
+\section*{1.}
+
+授業で扱われたグラフィックイコライザの例に基づいて、各数式表現の意味とそれぞれの領域での操作は以下のように説明できる。
+
+\begin{enumerate}
+    \item \textbf{各変数の意味}
+    \begin{itemize}
+        \item $\boldsymbol{F(u)}$ : \\
+        入力信号$f(t)$を周波数領域に変換したもの。どの周波数がどれくらいの強さで含まれているかを示している。
+        \item $\boldsymbol{H(u)}$ : \\
+        グラフィックイコライザに設定されたフィルタの周波数特性（伝達関数）。各周波数帯域ごとのスライダー位置によって決まる、特定の周波数を増幅（ブースト）または減衰（カット）させるための「倍率（ゲイン）」を表す。
+        \item $\boldsymbol{G(u) = F(u)H(u)}$ : \\
+        イコライザによる処理後の信号のスペクトル。元のスペクトル $F(u)$ の各周波数成分に対してイコライザの倍率 $H(u)$ を掛け合わせることで、意図した音質（低音強調など）に加工された後の周波数特性を示す。
+        \item $\boldsymbol{g(t) = f(t) * h(t)}$ : \\
+        出力される最終的な音声信号（時間領域または空間領域）。元の入力波形 $f(t)$ に対して、イコライザのシステムとしての特性（インパルス応答 $h(t)$）を畳み込んだ（コンボリューションした）結果の波形であり、実際にスピーカーから聞こえる音の波形を表す。
+    \end{itemize}
+
+    \item \textbf{周波数領域における操作と時間（空間）領域における等価な操作}
+    \begin{itemize}
+        \item \textbf{周波数領域における操作}：\textbf{「要素ごとの掛け算（乗算）」} \\
+        各周波数 $u$ において、$F(u)$ と $H(u)$ を単純に掛け合わせる操作を行っている。これは、特定の周波数成分だけを狙って大きくしたり小さくしたりする直感的な操作（任意の音域の強弱の調整）に相当する。
+        \item \textbf{時間（空間）領域における等価な操作}：\textbf{「畳み込み（コンボリューション）」} \\
+        周波数領域での掛け算は、時間領域においては入力信号 $f(t)$ とシステムのインパルス応答 $h(t)$ の「畳み込み積分」に数学的に等価となる。これは、過去から現在までの入力信号 $f(t)$ に対して、システムの応答特性 $h(t)$ を重み付きで重ね合わせ続ける（波形を一定の規則でなまらせたり、響かせたりする）局所的なフィルタリング操作を意味している。
+    \end{itemize}
+\end{enumerate}
+
+\section*{2.}
+
+\begin{enumerate}
+    \item[(A)] \leavevmode \\
+インデックスを $n=0, 1, 2$ に取ると仮定すると、各要素は以下のように計算できる。
+\begin{align*}
+    h_1[0] &= \frac{1}{3} \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} = \frac{1}{9} \\
+    h_1[1] &= \frac{1}{3} \cdot \frac{1}{3} + \frac{1}{3} \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} = \frac{2}{9} \\
+    h_1[2] &= \frac{1}{3} \cdot \frac{1}{3} + \frac{1}{3} \cdot \frac{1}{3} + \frac{1}{3} \cdot \frac{1}{3} = \frac{3}{9} = \frac{1}{3} \\
+    h_1[3] &= 0 \cdot \frac{1}{3} + \frac{1}{3} \cdot \frac{1}{3} + \frac{1}{3} \cdot \frac{1}{3} = \frac{2}{9} \\
+    h_1[4] &= 0 \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} + \frac{1}{3} \cdot \frac{1}{3} = \frac{1}{9}
+\end{align*}
+したがって、
+\[
+    \boxed{h_1 = \left[\frac{1}{9}, \frac{2}{9}, \frac{3}{9}, \frac{2}{9}, \frac{1}{9}\right]}
+\]
+
+    \item[(B)] \leavevmode \\
+\begin{align*}
+    h_2[0] &= \frac{1}{9} \cdot 1 + 0 \cdot 0 + 0 \cdot (-1) = \frac{1}{9} \\
+    h_2[1] &= \frac{2}{9} \cdot 1 + \frac{1}{9} \cdot 0 + 0 \cdot (-1) = \frac{2}{9} \\
+    h_2[2] &= \frac{3}{9} \cdot 1 + \frac{2}{9} \cdot 0 + \frac{1}{9} \cdot (-1) = \frac{2}{9} \\
+    h_2[3] &= \frac{2}{9} \cdot 1 + \frac{3}{9} \cdot 0 + \frac{2}{9} \cdot (-1) = 0 \\
+    h_2[4] &= \frac{1}{9} \cdot 1 + \frac{2}{9} \cdot 0 + \frac{3}{9} \cdot (-1) = -\frac{2}{9} \\
+    h_2[5] &= 0 \cdot 1 + \frac{1}{9} \cdot 0 + \frac{2}{9} \cdot (-1) = -\frac{2}{9} \\
+    h_2[6] &= 0 \cdot 1 + 0 \cdot 0 + \frac{1}{9} \cdot (-1) = -\frac{1}{9}
+\end{align*}
+したがって、
+\[
+    \boxed{h_2 = \left[\frac{1}{9}, \frac{2}{9}, \frac{2}{9}, 0, -\frac{2}{9}, -\frac{2}{9}, -\frac{1}{9}\right]}
+\]
+
+    \item[(C)] \textbf{$f * h_2$ によって達成される信号処理} \\
+$f$ を入力信号とする。畳み込みの結合法則より、$f * h_2 = f * (g * g * d) = (((f * g) * g) * d)$ と解釈できる。
+\begin{itemize}
+    \item $g = [1/3, 1/3, 1/3]$ は移動平均フィルタ（平滑化フィルタ・ローパスフィルタ）であり、信号の高周波ノイズを取り除き滑らかにする役割を持つ。
+    \item これを2回適用する ($f * g * g$) ことで、さらに強力で滑らかな平滑化が行われる。
+    \item $d = [1, 0, -1]$ は中心差分フィルタ（微分フィルタ・ハイパスフィルタ）であり、信号の変化率（勾配・エッジ）を抽出する役割を持つ。
+\end{itemize}
+したがって、$f * h_2$ は\textbf{「ノイズを平滑化によって除去した上で、信号の微分（エッジや急激な変化）を抽出する」}という信号処理を実現している。これは画像処理におけるソーベルフィルタ (Sobel filter) や、ガウシアンフィルタによる平滑化の後に微分を行う微分ガウシアン (Derivative of Gaussian; DoG) メソッドと同様の、「ノイズに頑健なエッジ検出」を意図した処理であると言える。
+\end{enumerate}
+
+\section*{3.}
+
+\begin{enumerate}
+    \item[(A)] \textbf{$W^{-1}$ の導出} \\
+    逆行列を求めるには「ガウス・ジョルダン法」や「余因子行列」を用いるが、複素数を含む$4 \times 4$ 行列では計算過程が極めて煩雑になり、計算ミスのリスクが高い。
+    しかし、本問の4点DFT行列 $W$ は、以下の3つの条件を満たす\textbf{ユニタリ行列}であり、ユニタリ行列の性質を用いると非常に簡便に逆行列を求めることができる。
+    確認のため、具体的に数式を用いて各条件を満たしていることを示す。
+
+    \begin{enumerate}
+        \item \textbf{正規化（各行・各列のノルムが1であること）} \\
+        例として第2行のベクトル $w_2 = \frac{1}{2}(1, -i, -1, i)$ のノルムの2乗を計算する。
+        \[
+            \|w_2\|^2 = \frac{1}{4} \left( |1|^2 + |-i|^2 + |-1|^2 + |i|^2 \right) = \frac{1}{4} (1 + 1 + 1 + 1) = 1
+        \]
+        他のすべての行および列についても、各成分の絶対値の2乗和は $1+1+1+1=4$ となるため、
+        係数の2乗 $\left(\frac{1}{2}\right)^2 = \frac{1}{4}$ と掛け合わされてノルムはすべて $1$ になることがわかる。
+
+        \item \textbf{直交性（異なる行・列同士の内積が0であること）} \\
+        例として第1行のベクトル $w_1 = \frac{1}{2}(1, 1, 1, 1)$ と第2行のベクトル $w_2$ の内積 $\langle w_1, w_2 \rangle$ を計算する。
+        \begin{align*}
+            \langle w_1, w_2 \rangle &= \frac{1}{4} \left\{ 1 \cdot \overline{1} + 1 \cdot \overline{(-i)} + 1 \cdot \overline{(-1)} + 1 \cdot \overline{i} \right\} \\
+            &= \frac{1}{4} \left\{ 1 \cdot 1 + 1 \cdot i + 1 \cdot (-1) + 1 \cdot (-i) \right\} \\
+            &= \frac{1}{4} (1 + i - 1 - i) = 0
+        \end{align*}
+        他の任意の異なる2行（および2列）の組においても、同様に内積は必ず $0$ となる。
+
+        \item \textbf{正方行列であること} \\
+        $W$ は行数 $4$、列数 $4$ の $4 \times 4$ 行列であり、明らかに正方行列である。
+    \end{enumerate}
+
+    以上の3条件を満たしていることから、$W$ がユニタリ行列であることが数学的に確かめられた。
+
+    ユニタリ行列において、逆行列 $W^{-1}$ はその\textbf{共役転置行列}$W^H$と等しくなるという性質がある。
+
+    \[
+        W^{-1} = W^H = (\overline{W})^T
+    \]
+
+    与えられた4点DFT行列 $W$ は以下の通りである。
+    \[
+        W = \frac{1}{2} \begin{pmatrix} 
+        1 & 1 & 1 & 1 \\ 
+        1 & -i & -1 & i \\ 
+        1 & -1 & 1 & -1 \\ 
+        1 & i & -1 & -i 
+        \end{pmatrix}
+    \]
+
+    まず、行列 $W$ のすべての虚数単位 $i$ の符号を反転させ、複素共役 $\overline{W}$ を求める。
+    \[
+        \overline{W} = \frac{1}{2} \begin{pmatrix} 
+        1 & 1 & 1 & 1 \\ 
+        1 & i & -1 & -i \\ 
+        1 & -1 & 1 & -1 \\ 
+        1 & -i & -1 & i 
+        \end{pmatrix}
+    \]
+
+    次に、行と列を入れ替える転置操作 $(\overline{W})^T$ を行う。本問の $\overline{W}$ は対角成分を軸に対称な対称行列であるため、転置後も成分の配置は変わらない。
+    \[
+        W^H = (\overline{W})^T = \overline{W}
+    \]
+
+    したがって、求める逆行列 $W^{-1}$ は以下の通りとなる。
+    \[
+        \boxed{ W^{-1} = \frac{1}{2} \begin{pmatrix} 
+        1 & 1 & 1 & 1 \\ 
+        1 & i & -1 & -i \\ 
+        1 & -1 & 1 & -1 \\ 
+        1 & -i & -1 & i 
+        \end{pmatrix} }
+    \]
+
+    \item[(B)] \textbf{実信号 $f = (f_0, f_1, f_2, f_3)^T$ に対して $F = Wf$ が純実数となるための条件} \\
+    与えられた実信号ベクトル $f = (f_0, f_1, f_2, f_3)^T$ に対して、$F = Wf$ を具体的に展開して計算すると以下のようになる。
+    \[
+        F = Wf = \frac{1}{2} \begin{pmatrix} 1 & 1 & 1 & 1 \\ 1 & -i & -1 & i \\ 1 & -1 & 1 & -1 \\ 1 & i & -1 & -i \end{pmatrix} \begin{pmatrix} f_0 \\ f_1 \\ f_2 \\ f_3 \end{pmatrix}
+        = \frac{1}{2} \begin{pmatrix} f_0 + f_1 + f_2 + f_3 \\ f_0 - i f_1 - f_2 + i f_3 \\ f_0 - f_1 + f_2 - f_3 \\ f_0 + i f_1 - f_2 - i f_3 \end{pmatrix}
+    \]
+    結果の各成分 $F_0, F_1, F_2, F_3$ について実部と虚部を整理する。
+    \begin{align*}
+        F_0 &= \frac{1}{2}(f_0 + f_1 + f_2 + f_3) \\
+        F_1 &= \frac{1}{2}(f_0 - f_2) - i \frac{1}{2}(f_1 - f_3) \\
+        F_2 &= \frac{1}{2}(f_0 - f_1 + f_2 - f_3) \\
+        F_3 &= \frac{1}{2}(f_0 - f_2) + i \frac{1}{2}(f_1 - f_3)
+    \end{align*}
+    成分を見ると、$F_0$ および $F_2$ は常に実数となる。
+    一方、$F_1$ および $F_3$ が実数となるためには、それぞれの虚数部（の係数）が $0$ である必要がある。すなわち、
+    \[
+        -\frac{1}{2}(f_1 - f_3) = 0 \quad \text{かつ} \quad \frac{1}{2}(f_1 - f_3) = 0
+    \]
+    これを解くと、
+    \[
+        f_1 - f_3 = 0 \implies f_1 = f_3
+    \]
+    したがって、$F = Wf$ が実数となるための必要な条件は以下の通りである。
+    \[
+        \boxed{ f_1 = f_3 }
+    \]
+
+    \item[(C)] \textbf{条件を満たす非ゼロの実信号 $f$ の例と $F$ の計算} \\
+    (B) で求めた条件 $f_1 = f_3$ を満たす非ゼロの信号の一例として、$f = (1, 2, 3, 2)^T$ を挙げる。
+    このとき $f_1 = 2, f_3 = 2$ であり、条件を確かに満たしている。
+
+    この $f$ に対する $F = Wf$ を計算すると以下のようになる。
+    \begin{align*}
+        F &= Wf = \frac{1}{2} \begin{pmatrix} 1 & 1 & 1 & 1 \\ 1 & -i & -1 & i \\ 1 & -1 & 1 & -1 \\ 1 & i & -1 & -i \end{pmatrix} \begin{pmatrix} 1 \\ 2 \\ 3 \\ 2 \end{pmatrix} \\
+        &= \frac{1}{2} \begin{pmatrix} 1 + 2 + 3 + 2 \\ 1 - 2i - 3 + 2i \\ 1 - 2 + 3 - 2 \\ 1 + 2i - 3 - 2i \end{pmatrix} \\
+        &= \frac{1}{2} \begin{pmatrix} 8 \\ -2 \\ 0 \\ -2 \end{pmatrix} \\
+        &= \begin{pmatrix} 4 \\ -1 \\ 0 \\ -1 \end{pmatrix}
+    \end{align*}
+    導出された $F$ は純実数ベクトルとなっていることが確認できる。
+    したがって、
+    \[
+        \boxed{ f = \begin{pmatrix} 1 \\ 2 \\ 3 \\ 2 \end{pmatrix}, \quad F = \begin{pmatrix} 4 \\ -1 \\ 0 \\ -1 \end{pmatrix} }
+    \]
+\end{enumerate}
+
+
+\end{document}

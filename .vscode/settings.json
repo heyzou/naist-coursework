@@ -1,0 +1,14 @@
+{
+  "files.exclude": {
+    "**/*.aux": true,
+    "**/*.log": true,
+    "**/*.fls": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.synctex.gz": true,
+    "**/*.out": true,
+    "**/*.toc": true,
+    "**/*.dvi": true,
+    "**/*.bbl": true,
+    "**/*.blg": true
+  }
+}
