@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2026.4.30)  30 APR 2026 15:27
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2026.4.30)  30 APR 2026 15:28
  restricted system commands enabled.
 **main.tex
 (./main.tex
@@ -606,9 +606,10 @@ File: luatex.def 2022/09/22 v1.2d Graphics/color driver for luatex
 ))
 \Gin@req@height=\dimen185
 \Gin@req@width=\dimen186
-) (./main.aux)
-\openout1 = main.aux
+)
+No file joho_kagaku_kiso_A_dai3kai_report.aux.
 
+\openout1 = joho_kagaku_kiso_A_dai3kai_report.aux
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
 LaTeX Font Info:    ... okay on input line 7.
 LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
@@ -620,7 +621,7 @@ LaTeX Font Info:    ... okay on input line 7.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 7
 .
- (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 7.
@@ -757,7 +758,8 @@ LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 (load cache: extra_lmroman6-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 (Font)              scaled to size 5.5pt on input line 77.
- [2] [3] [4] [5] [6] (./main.aux)
+ [2] [3] [4] [5] [6]
+(./joho_kagaku_kiso_A_dai3kai_report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -765,14 +767,14 @@ L3 programming layer <2024-01-22>
 )
 
 Here is how much of LuaTeX's memory you used:
- 6895 strings out of 476553
+ 6890 strings out of 476553
  125244,1977958 words of node,token memory allocated
  1415 words of node memory still in use:
    12 hlist, 2 vlist, 6 rule, 2 glue, 4 kern, 2 glyph, 359 attribute, 50 glue_sp
 ec, 45 attribute_list, 1 write, 15 user_defined nodes
    avail lists: 1:8,2:32152,3:401,4:324,5:432,6:30,7:3667,8:43,9:1793,10:38,11:4
 
- 28713 multiletter control sequences out of 65536+600000
+ 28712 multiletter control sequences out of 65536+600000
  65 fonts using 53160087 bytes
  107i,14n,101p,1757b,379s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/d
@@ -792,7 +794,8 @@ b></usr/share/texmf/fonts/type1/public/lm/lmmib7.pfb></usr/share/texmf/fonts/typ
 e1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/sh
 are/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/
 lm/lmsy8.pfb>
-Output written on main.pdf (6 pages, 208533 bytes).
+Output written on joho_kagaku_kiso_A_dai3kai_report.pdf (6 pages, 208533 bytes).
+
 
 PDF statistics: 121 PDF objects out of 1000 (max. 8388607)
  81 compressed objects within 1 object stream
