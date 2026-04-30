@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2025.2.24)  27 APR 2026 14:46
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2025.2.24)  28 APR 2026 14:48
  restricted system commands enabled.
 **main.tex
 (./main.tex
@@ -760,27 +760,26 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 5.5pt on input line 24.
  [1
 
-{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- [4](load cache: extra_lmroman8-regular.luc)
+{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2](load
+ cache: extra_lmroman8-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 7.69997pt on input line 174.
+(Font)              scaled to size 7.69997pt on input line 78.
 (load cache: extra_lmroman6-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 5.5pt on input line 174.
- [5]
-[6] (./main.aux))
+(Font)              scaled to size 5.5pt on input line 78.
+ [3] [4] [5]
+(./main.aux))
 
 Here is how much of LuaTeX's memory you used:
- 7342 strings out of 478285
- 156557,1977958 words of node,token memory allocated
- 1439 words of node memory still in use:
-   12 hlist, 2 vlist, 6 rule, 2 glue, 4 kern, 2 glyph, 370 attribute, 50 glue_sp
-ec, 46 attribute_list, 1 write, 15 user_defined nodes
-   avail lists: 1:19,2:39926,3:546,4:323,5:384,6:36,7:4195,8:45,9:1824,10:38,11:
-8
- 27166 multiletter control sequences out of 65536+600000
+ 7340 strings out of 478285
+ 156560,1977958 words of node,token memory allocated
+ 1415 words of node memory still in use:
+   12 hlist, 2 vlist, 6 rule, 2 glue, 4 kern, 2 glyph, 359 attribute, 50 glue_sp
+ec, 45 attribute_list, 1 write, 15 user_defined nodes
+   avail lists: 1:17,2:39588,3:519,4:279,5:386,6:34,7:3685,8:43,9:1730,10:38
+ 27164 multiletter control sequences out of 65536+600000
  65 fonts using 53158007 bytes
- 106i,14n,102p,1757b,467s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 106i,14n,102p,1757b,460s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local
 /texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/20
 23/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/local/texlive/2023/texmf-di
@@ -792,18 +791,21 @@ pentype/public/haranoaji/HaranoAjiMincho-Regular.otf></usr/local/texlive/2023/te
 xmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr/local/texlive/2023/te
 xmf-dist/fonts/opentype/public/haranoaji/HaranoAjiGothic-Medium.otf></usr/local/
 texlive/2023/texmf-dist/fonts/type1/public/lm/lmbsy10.pfb></usr/local/texlive/20
-23/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2023/texmf-di
-st/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/ty
-pe1/public/lm/lmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/
-lm/lmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmib10.p
-fb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/loc
-al/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/20
-23/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-di
-st/fonts/type1/public/lm/lmsy8.pfb>
-Output written on main.pdf (6 pages, 205358 bytes).
+23/texmf-dist/fonts/type1/public/lm/lmbsy7.pfb></usr/local/texlive/2023/texmf-di
+st/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2023/texmf-dist/fonts/ty
+pe1/public/lm/lmbx8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/l
+m/lmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi12.pf
+b></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/loca
+l/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/local/texlive/
+2023/texmf-dist/fonts/type1/public/lm/lmmib7.pfb></usr/local/texlive/2023/texmf-
+dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/t
+ype1/public/lm/lmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/l
+m/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
+>
+Output written on main.pdf (5 pages, 206875 bytes).
 
-PDF statistics: 109 PDF objects out of 1000 (max. 8388607)
- 72 compressed objects within 1 object stream
+PDF statistics: 118 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 
