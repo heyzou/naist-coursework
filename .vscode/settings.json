@@ -10,5 +10,9 @@
     "**/*.dvi": true,
     "**/*.bbl": true,
     "**/*.blg": true
+  },
+  "latex-workshop.view.pdf.viewer": "browser",
+  "workbench.editorAssociations": {
+    "*.pdf": "pdf.preview"
   }
 }
