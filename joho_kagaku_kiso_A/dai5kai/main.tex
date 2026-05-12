@@ -1,0 +1,295 @@
+\documentclass[11pt,a4paper]{jlreq}
+\usepackage{amsmath,amssymb}
+\usepackage[dvipdfmx]{graphicx}
+\def\pgfsysdriver{pgfsys-dvipdfmx.def}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usetikzlibrary{circuits.logic.US,calc}
+\usepackage{array}
+\usepackage{float}
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{情報科学基礎A 第5回 レポート}}
+\end{center}
+\vspace{1em}
+
+\begin{flushright}
+提出日：\today \\
+学籍番号：2611193 \\
+氏名：中井平蔵
+\end{flushright}
+
+\section*{Q1}
+\subsection*{(1) 真理値表}
+真理値表は以下のようになる。
+\vspace{0.4\baselineskip}
+\begin{table}[H]
+\centering
+\caption{3入力多数決回路の真理値表}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|>{\centering\arraybackslash}m{1.8cm}|>{\centering\arraybackslash}m{1.8cm}|>{\centering\arraybackslash}m{1.8cm}|>{\centering\arraybackslash}m{1.8cm}|}
+\hline
+a & b & c & y \\
+\hline
+0 & 0 & 0 & 0 \\
+ \hline
+0 & 0 & 1 & 0 \\
+ \hline
+0 & 1 & 0 & 0 \\
+ \hline
+0 & 1 & 1 & 1 \\
+ \hline
+1 & 0 & 0 & 0 \\
+ \hline
+1 & 0 & 1 & 1 \\
+ \hline
+1 & 1 & 0 & 1 \\
+ \hline
+1 & 1 & 1 & 1 \\
+\hline
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+\end{table}
+\vspace{1.0em}
+
+\subsection*{(2) 論理式の導出}
+$y=1$ となるのは、$(a,b,c)=(0,1,1),(1,0,1),(1,1,0),(1,1,1)$ のときである。
+標準形（加法標準形, Sum of Products）は、真理値表で $y=1$ となる各行に対して
+「0の変数は否定、1の変数はそのまま」掛け合わせた最小項を作り、それらをすべてORで足し合わせて作る。
+よって、
+\[
+\begin{aligned}
+(0,1,1)&\rightarrow \bar{a}bc,\\
+(1,0,1)&\rightarrow a\bar{b}c,\\
+(1,1,0)&\rightarrow ab\bar{c},\\
+(1,1,1)&\rightarrow abc
+\end{aligned}
+\]
+より標準形は以下のようになる。
+\[
+y=\bar{a}bc+a\bar{b}c+ab\bar{c}+abc
+\]
+ここで、$x + x = x$より、$abc = abc + abc + abc$が成り立つ。よって、
+\[
+\begin{aligned}
+y
+&=(ab\bar{c}+abc)+(a\bar{b}c+abc)+(\bar{a}bc+abc)\\
+&=ab(\bar{c}+c)+ac(\bar{b}+b)+bc(\bar{a}+a)\\
+\end{aligned}
+\]
+ここで、$x + \bar{x} = 1$ より、$\bar{c}+c=1$、$\bar{b}+b=1$、$\bar{a}+a=1$ が成り立つ。\\
+したがって、論理式は以下のようになる。
+\[
+\fbox{$y=ab+bc+ca$}
+\]
+
+\section*{Q2}
+\noindent
+入力ボタン $a,b$、リセット $r$、クロック $c$ を持つシンプルなデジタル錠を設計する。
+解錠条件は「Aを押した次のクロックでBを押す」のみである。
+
+\subsection*{(1) 状態定義}
+\begin{itemize}
+\item $S_0$: Initial（初期ロック状態）
+\item $S_1$: A\_pressed（Aが押されたことを記憶した状態）
+\item $S_2$: Unlocked（解錠状態）
+\end{itemize}
+
+\subsection*{(2) 状態割当表と遷移表}
+状態を次の表のように2ビットで表す。
+\vspace{0.4\baselineskip}
+\begin{table}[H]
+\centering
+\caption{状態割当表}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|>{\centering\arraybackslash}m{4.0cm}|>{\centering\arraybackslash}m{4.0cm}|}
+\hline
+State & $(Q_1^{(n)}Q_0^{(n)})$ \\
+\hline
+$S_0$ & 00 \\
+\hline
+$S_1$ & 01 \\
+\hline
+$S_2$ & 10 \\
+\hline
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+\end{table}
+
+\vspace{0.5\baselineskip}
+
+入力と状態遷移表の関係は以下のようになる。
+
+\vspace{0.6\baselineskip}
+
+\begin{table}[H]
+\centering
+\caption{状態遷移表}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|>{\centering\arraybackslash}m{1.2cm}|>{\centering\arraybackslash}m{1.2cm}|>{\centering\arraybackslash}m{1.0cm}|>{\centering\arraybackslash}m{1.0cm}|>{\centering\arraybackslash}m{1.0cm}|>{\centering\arraybackslash}m{1.2cm}|>{\centering\arraybackslash}m{1.2cm}|>{\centering\arraybackslash}m{1.0cm}|}
+\hline
+$Q_1^{(n)}$ & $Q_0^{(n)}$ & $a$ & $b$ & $r$ & $Q_1^{(n+1)}$ & $Q_0^{(n+1)}$ & Out \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 \\
+\hline
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+\hline
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\hline
+0 & 1 & 1 & 0 & 0 & 0 & 1 & 0 \\
+\hline
+0 & 1 & 0 & 1 & 0 & 1 & 0 & 0 \\
+\hline
+0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\
+\hline
+1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+\hline
+1 & 0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+\hline
+1 & 0 & 0 & 1 & 0 & 1 & 0 & 1 \\
+\hline
+1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+\hline
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+\end{table}
+
+\vspace{0.6\baselineskip}
+
+\subsection*{(3) 論理式}
+\begin{itemize}
+\item $Q_1^{(n+1)}$ の導出 \\
+$Q_1^{(n+1)}=1$ となるのは、\\
+\[
+(Q_1^{(n)},Q_0^{(n)},a,b,r)=(0,1,0,1,0),(1,0,0,0,0),(1,0,1,0,0),(1,0,0,1,0)
+\]
+よって、
+\[
+Q_1^{(n+1)}=\overline{Q_1^{(n)}}Q_0^{(n)}\overline{a}b\overline{r}+Q_1^{(n)}\overline{Q_0^{(n)}}\overline{a}\,\overline{b}\,\overline{r}+Q_1^{(n)}\overline{Q_0^{(n)}}a\overline{b}\,\overline{r}+Q_1^{(n)}\overline{Q_0^{(n)}}\overline{a}b\overline{r}
+\]
+初めに、2〜4項を $\overline{r}\,Q_1^{(n)}\overline{Q_0^{(n)}}$ でくくると、\\
+\[
+Q_1^{(n+1)}=\overline{r}\,\overline{Q_1^{(n)}}Q_0^{(n)}\overline{a}b+\overline{r}\,Q_1^{(n)}\overline{Q_0^{(n)}}(\overline{a}\,\overline{b}+a\overline{b}+\overline{a}b)
+\]
+ここで、$\overline{a}\,\overline{b}+a\overline{b}=(\overline{a}+a)\overline{b}=\overline{b}$より、
+\vspace{0.3\baselineskip}
+\[
+Q_1^{(n+1)}=\overline{r}\,\overline{Q_1^{(n)}}Q_0^{(n)}\overline{a}b+\overline{r}\,Q_1^{(n)}\overline{Q_0^{(n)}}(\overline{b}+\overline{a}b)
+\]
+また、$\overline{b}+\overline{a}b$ は場合分けで次のように分かる。
+\begin{itemize}
+\item $b=0$ のとき：$\overline{b}+\overline{a}b=1+0=1$
+\item $b=1$ のとき：$\overline{b}+\overline{a}b=0+\overline{a}=\overline{a}$
+\end{itemize}
+したがって、$\overline{b}+\overline{a}b=\overline{a}+\overline{b}$ である。\\
+よって、
+\vspace{0.3\baselineskip}
+\[
+Q_1^{(n+1)}=\overline{r}\,\overline{Q_1^{(n)}}Q_0^{(n)}\overline{a}b+\overline{r}\,Q_1^{(n)}\overline{Q_0^{(n)}}(\overline{a}+\overline{b})
+\]
+さらに、$a,b$ は同時に $1$ にならないため、$\overline{a}+\overline{b}=1$である。よって、 \\
+\[
+Q_1^{(n+1)}=\overline{r}\,\overline{Q_1^{(n)}}Q_0^{(n)}\overline{a}b+\overline{r}\,Q_1^{(n)}\overline{Q_0^{(n)}}
+\]
+また、$(Q_1^{(n)},Q_0^{(n)}) = (1,1)$となることは無いため、$Q_1^{(n)}\overline{Q_0^{(n)}}=Q_1^{(n)}$ である。よって、\\
+\[
+Q_1^{(n+1)}=\overline{r}\,\overline{Q_1^{(n)}}Q_0^{(n)}\overline{a}b +\overline{r}\,Q_1^{(n)}
+\]
+同様に、$(Q_1^{(n)},Q_0^{(n)}) = (1,1)$となることは無いため、$\overline{Q_1^{(n)}}Q_0^{(n)}=Q_0^{(n)}$ である。よって、\\
+\[
+Q_1^{(n+1)}=\overline{r}\,Q_0^{(n)}\overline{a}b +\overline{r}\,Q_1^{(n)}
+\]
+さらに、$a,b$ は同時に $1$ にならないため、$\overline{a}b = b$である。よって、 \\
+\[
+Q_1^{(n+1)}=\overline{r}\,\bigl(Q_1^{(n)}+Q_0^{(n)}b\bigr)
+\]
+したがって、
+\vspace{0.3\baselineskip}
+\[
+Q_1^{(n+1)}=\overline{r}\,\bigl(Q_1^{(n)}+Q_0^{(n)}b\bigr)
+\]
+
+\item $Q_0^{(n+1)}$ の導出 \\
+$Q_0^{(n+1)}=1$ となるのは、\\
+\[
+(Q_1^{(n)},Q_0^{(n)},a,b,r)=(0,0,1,0,0),(0,1,1,0,0)
+\]
+よって、
+\[
+Q_0^{(n+1)}=\overline{Q_1^{(n)}}\,\overline{Q_0^{(n)}}a\overline{b}\,\overline{r}+\overline{Q_1^{(n)}}Q_0^{(n)}a\overline{b}\,\overline{r}
+\]
+初めに、$\overline{r}\,\overline{Q_1^{(n)}}a\overline{b}$ でくくると、\\
+\[
+Q_0^{(n+1)}=\overline{r}\,\overline{Q_1^{(n)}}a\overline{b}\,(\overline{Q_0^{(n)}}+Q_0^{(n)})
+\]
+\vspace{-0.4\baselineskip}
+$\overline{Q_0^{(n)}}+Q_0^{(n)}=1$ より、\\
+\[
+Q_0^{(n+1)}=\overline{r}\,\overline{Q_1^{(n)}}a\overline{b}
+\]
+\end{itemize}
+
+\begin{itemize}
+\item 出力 \\
+出力が1となるのは、\\
+\[
+(Q_1^{(n)},Q_0^{(n)},a,b,r)=(1,0,0,0,0),(1,0,1,0,0),(1,0,0,1,0)
+\]
+よって、
+\[
+\mathrm{Out}
+=Q_1^{(n)}\overline{Q_0^{(n)}}\overline{a}\,\overline{b}\,\overline{r}
++Q_1^{(n)}\overline{Q_0^{(n)}}a\overline{b}\,\overline{r}
++Q_1^{(n)}\overline{Q_0^{(n)}}\overline{a}b\overline{r}
+\]
+初めに、$Q_1^{(n)}\overline{Q_0^{(n)}}\overline{r}$ でくくると、\\
+\[
+\mathrm{Out}=Q_1^{(n)}\overline{Q_0^{(n)}}\overline{r}\,(\overline{a}\,\overline{b}+a\overline{b}+\overline{a}b)
+\]
+$\overline{a}\,\overline{b}+a\overline{b}=\overline{b}$、さらに
+$\overline{b}+\overline{a}b=\overline{a}+\overline{b}$ より、
+\[
+\mathrm{Out}=Q_1^{(n)}\overline{Q_0^{(n)}}\overline{r}\,(\overline{a}+\overline{b})
+\]
+ここで、$a,b$ は同時に1にならないため $\overline{a}+\overline{b}=1$ である。したがって、
+\[
+\mathrm{Out}=Q_1^{(n)}\overline{Q_0^{(n)}}\overline{r}
+\]
+\end{itemize}
+以上より、
+\[
+Q_1^{(n+1)}=\overline{r}\,\bigl(Q_1^{(n)}+Q_0^{(n)}b\bigr),\quad
+Q_0^{(n+1)}=\overline{r}\,\overline{Q_1^{(n)}}a\overline{b},\quad
+\mathrm{Out}=Q_1^{(n)}\overline{Q_0^{(n)}}\overline{r}
+\]
+
+\subsection*{(4) 回路構成（D-FF）}
+次状態論理を以下のようにおき、2個のD-FFで状態 $(Q_1,Q_0)$ を保持する。
+\[
+D_1=Q_1^{(n+1)},\quad D_0=Q_0^{(n+1)}
+\]
+
+\begin{figure}[H]
+\centering
+\noindent
+% 画像配置調整用パラメータ
+% width: 表示サイズ, trim: left bottom right top の順（単位は pt）
+\includegraphics[
+  width=0.44\textheight,
+  angle=90,
+  origin=c,
+  trim=450 450 450 450,
+  clip
+]{img/IMG_9454.pdf}
+\vspace{-2.4\baselineskip}
+\setlength{\abovecaptionskip}{2pt}
+\caption{回路構成図（D-FFを用いた実装）}
+\end{figure}
+
+\end{document}
