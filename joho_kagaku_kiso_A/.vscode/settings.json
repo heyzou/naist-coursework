@@ -1,0 +1,8 @@
+{
+  "latex-workshop.latex.outDir": "%DIR%",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  "workbench.editorAssociations": {
+    "*.pdf": "pdf.preview"
+  }
+}
