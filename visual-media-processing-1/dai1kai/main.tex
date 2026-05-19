@@ -1,0 +1,234 @@
+﻿\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{luatexja-fontspec}
+\setmainjfont{HaranoAjiMincho-Regular}
+\setsansjfont{HaranoAjiGothic-Medium}
+
+% Recommended PDF filename:
+% 2611193_HeizoNakai_visual_media_processing1_dai1kai.pdf
+% Example build command:
+% latexmk -pdfdvi -jobname=2611193_HeizoNakai_visual_media_processing1_dai1kai main.tex
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{視覚メディア処理I 第1回レポート}}
+\end{center}
+\vspace{1em}
+
+\begin{flushright}
+提出日: \today \\
+学籍番号: 2611193 \\
+氏名: 中井 平蔵
+\end{flushright}
+
+\section*{課題}
+\begin{enumerate}
+  \item スライド24ページの回転表現（オイラー角，回転行列，Rodrigues 表現，クォータニオン）の相互変換方法を説明する。
+  \item 次のカメラに対して透視投影行列を求める。
+  \begin{itemize}
+    \item 焦点距離: $f=50\ \mathrm{mm}$
+    \item センササイズ: $33.6\ \mathrm{mm}\times 22.4\ \mathrm{mm}$
+    \item 画素数: $6720\times 4480\ \mathrm{pixel}$
+    \item 視線軸はセンサ中心を通る（主点は画像中心）
+  \end{itemize}
+\end{enumerate}
+
+\section*{解答}
+\subsection*{1. 回転表現の相互変換}
+\setlength{\parindent}{1em}
+3次元回転は同じ幾何学的意味を，複数の表現で書き換えられる。実装では
+「どの表現を中間表現にするか」を固定すると変換を整理しやすい。ここでは
+回転行列 $R$ を中心として説明する。
+
+\subsubsection*{(0) 各表現の定義}
+\begin{itemize}
+  \item オイラー角: 3つの角 $(\phi,\theta,\psi)$ で回転を表す。回転順序（XYZ、ZYXなど）を必ず指定する。
+  \item 回転行列: 直交行列 $R\in SO(3)$（$R^\top R=I,\ \det R=1$）。
+  \item Rodrigues 表現（軸角）: 単位軸 $\mathbf{u}$ と角度 $\theta$ の組 $(\mathbf{u},\theta)$。
+  \item クォータニオン: 単位クォータニオン $q=(w,x,y,z),\ \|q\|=1$。
+\end{itemize}
+以降では，ベクトルは列ベクトルとする。
+
+\subsubsection*{(a) 3×3回転行列 $\leftrightarrow$ オイラー角}
+\hspace*{1em}\textbf{(a-1) オイラー角 $\rightarrow$ 回転行列}
+
+回転順序を ZYX（yaw-pitch-roll）と固定し，角度を
+$\psi$（$z$軸），$\theta$（$y$軸），$\phi$（$x$軸）とする。
+\[
+R_x(\phi)=
+\begin{bmatrix}
+1&0&0\\
+0&\cos\phi&-\sin\phi\\
+0&\sin\phi&\cos\phi
+\end{bmatrix},\ 
+R_y(\theta)=
+\begin{bmatrix}
+\cos\theta&0&\sin\theta\\
+0&1&0\\
+-\sin\theta&0&\cos\theta
+\end{bmatrix},\ 
+R_z(\psi)=
+\begin{bmatrix}
+\cos\psi&-\sin\psi&0\\
+\sin\psi&\cos\psi&0\\
+0&0&1
+\end{bmatrix}
+\]
+とすると，
+\[
+R = R_z(\psi)R_y(\theta)R_x(\phi)
+\]
+で回転行列を得る。
+
+\hspace*{1em}\textbf{(a-2) 回転行列 $\rightarrow$ オイラー角}
+
+逆変換は $R=[r_{ij}]$ から
+\[
+\theta = \arcsin(-r_{31}),\quad
+\phi = \mathrm{atan2}(r_{32},r_{33}),\quad
+\psi = \mathrm{atan2}(r_{21},r_{11})
+\]
+で求める（この式は ZYX 順専用）。注意として，$\cos\theta\approx 0$
+（$\theta\approx\pm\frac{\pi}{2}$）ではジンバルロックが起こり，角度 $\phi$ と $\psi$
+を一意に分離できないため，別の式や別表現への切替が必要である。
+
+\subsubsection*{(b) 回転行列 $\leftrightarrow$ Rodrigues 表現（軸角）}
+回転軸の単位ベクトルを $\mathbf{u}=(u_x,u_y,u_z)^\top$，回転角を $\theta$ とすると，
+\[
+R = I + \sin\theta\,[\mathbf{u}]_\times + (1-\cos\theta)[\mathbf{u}]_\times^2
+\]
+（Rodrigues の回転公式）である。ここで
+\[
+[\mathbf{u}]_\times=
+\begin{bmatrix}
+0 & -u_z & u_y\\
+u_z & 0 & -u_x\\
+-u_y & u_x & 0
+\end{bmatrix}.
+\]
+逆に $R$ からは
+\[
+\theta=\cos^{-1}\!\left(\frac{\mathrm{tr}(R)-1}{2}\right),\quad
+\mathbf{u}=\frac{1}{2\sin\theta}
+\begin{bmatrix}
+r_{32}-r_{23}\\
+r_{13}-r_{31}\\
+r_{21}-r_{12}
+\end{bmatrix}
+\]
+で軸角を復元できる（$\theta\approx 0$ では近似が必要）。
+実装ではまず $\theta$ を計算し，$\theta$ が十分小さいときは
+$\mathbf{u}$ を前回値で保持するか，
+$\mathbf{u}\theta$（回転ベクトル）で直接扱うと安定する。
+
+\subsubsection*{(c) 回転行列 $\leftrightarrow$ クォータニオン}
+単位クォータニオンを
+\[
+q=(w,x,y,z),\quad \|q\|=1
+\]
+とすると，対応する回転行列は
+\[
+R=
+\begin{bmatrix}
+1-2(y^2+z^2) & 2(xy-wz) & 2(xz+wy)\\
+2(xy+wz) & 1-2(x^2+z^2) & 2(yz-wx)\\
+2(xz-wy) & 2(yz+wx) & 1-2(x^2+y^2)
+\end{bmatrix}.
+\]
+逆変換は $\mathrm{tr}(R)$ を用いて
+\[
+w=\frac{1}{2}\sqrt{1+r_{11}+r_{22}+r_{33}}
+\]
+を起点に，他成分を差分項から求める。例えば $w\neq 0$ なら
+\[
+x=\frac{r_{32}-r_{23}}{4w},\ 
+y=\frac{r_{13}-r_{31}}{4w},\ 
+z=\frac{r_{21}-r_{12}}{4w}.
+\]
+ただし数値安定のため，実装では「$r_{11}$ と $r_{22}$ と $r_{33}$ のうち最大の対角成分」
+を基準に分岐して計算する方法が広く使われる。最後に
+$q\leftarrow q/\|q\|$ と正規化する。
+
+\subsubsection*{(d) Rodrigues 表現 $\leftrightarrow$ クォータニオン}
+軸角 $(\mathbf{u},\theta)$ から
+\[
+q=
+\left(\cos\frac{\theta}{2},\ 
+u_x\sin\frac{\theta}{2},\ 
+u_y\sin\frac{\theta}{2},\ 
+u_z\sin\frac{\theta}{2}\right)
+\]
+でクォータニオンに変換できる。逆に
+\[
+\theta=2\arccos(w),\quad
+\mathbf{u}=\frac{1}{\sin(\theta/2)}(x,y,z)^\top
+\]
+で軸角に戻せる（$\sin(\theta/2)\approx 0$ では軸は任意に近い）。
+
+\subsubsection*{(e) 実用上の変換フロー}
+直接式を多数覚えるより，次のように $R$ を中間に置くと整理しやすい。
+\begin{itemize}
+  \item オイラー角 $\rightarrow R \rightarrow q$（姿勢推定・補間でよく使う）
+  \item $q \rightarrow R \rightarrow$ オイラー角（表示用の角度に戻す）
+  \item Rodrigues $\rightarrow R \rightarrow q$（最適化変数から姿勢へ）
+\end{itemize}
+どの経路でも，最終段階で
+\begin{itemize}
+  \item 回転行列なら直交性（$R^\top R\approx I$）を確認
+  \item クォータニオンなら正規化（$\|q\|=1$）
+\end{itemize}
+を行うと，数値誤差の蓄積を抑えられる。
+
+\subsection*{2. 透視投影行列の計算}
+画素ピッチ（1画素あたりの長さ）は
+\[
+p_x=\frac{33.6}{6720}=0.005\ \mathrm{mm/pixel},\quad
+p_y=\frac{22.4}{4480}=0.005\ \mathrm{mm/pixel}.
+\]
+したがって焦点距離の画素単位は
+\[
+f_x=\frac{50}{0.005}=10000,\quad
+f_y=\frac{50}{0.005}=10000.
+\]
+主点はセンサ中心より
+\[
+c_x=\frac{6720}{2}=3360,\quad c_y=\frac{4480}{2}=2240.
+\]
+スキュー $s=0$ とすると，内部パラメータ行列は
+\[
+K=
+\begin{bmatrix}
+10000 & 0 & 3360\\
+0 & 10000 & 2240\\
+0 & 0 & 1
+\end{bmatrix}.
+\]
+カメラ座標系で外部パラメータを $[R|t]=[I|0]$ と置けば，透視投影行列は
+\[
+P=K[I|0]=
+\begin{bmatrix}
+10000 & 0 & 3360 & 0\\
+0 & 10000 & 2240 & 0\\
+0 & 0 & 1 & 0
+\end{bmatrix}.
+\]
+よって3次元点 $\mathbf{X}=(X,Y,Z,1)^\top$ の画像座標は
+\[
+\lambda
+\begin{bmatrix}
+u\\v\\1
+\end{bmatrix}
+=
+P\mathbf{X},\quad
+u=\frac{10000X+3360Z}{Z},\ 
+v=\frac{10000Y+2240Z}{Z}.
+\]
+
+\section*{考察}
+回転表現はそれぞれ長所が異なる。回転行列は合成が容易だが冗長，オイラー角は直感的だがジンバルロックがある。Rodrigues（軸角）は最小3自由度で最適化に使いやすく，クォータニオンは補間（SLERP）と数値安定性に優れる。用途に応じて表現を切り替え，最終的に投影計算では行列形式へ統一するのが実装上有効である。
+
+\end{document}

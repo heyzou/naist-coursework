@@ -1,0 +1,25 @@
+# Fdb version 4
+["dvipdf"] 0 "2611193_HeizoNakai_visual_media_processing1_lecture1.dvi" "2611193_HeizoNakai_visual_media_processing1_lecture1.pdf" "2611193_HeizoNakai_visual_media_processing1_lecture1" 0 -1
+  "2611193_HeizoNakai_visual_media_processing1_lecture1.dvi" 0 -1 0 "latex"
+  (generated)
+  "2611193_HeizoNakai_visual_media_processing1_lecture1.pdf"
+  (rewritten before read)
+["latex"] 1779105315.8037 "main.tex" "2611193_HeizoNakai_visual_media_processing1_lecture1.dvi" "2611193_HeizoNakai_visual_media_processing1_lecture1" 1779105315.953 2
+  "/etc/texmf/web2c/texmf.cnf" 1777527148.4352 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1601931149 46845 3b58f70c6e861a13d927bff09d35ecbc ""
+  "/usr/share/texlive/texmf-dist/tex/latex/jlreq/jlreq-helpers.sty" 1687118641 21198 3aed3f3ab8db7940ebefeeaf4bdd409b ""
+  "/usr/share/texlive/texmf-dist/tex/latex/jlreq/jlreq.cls" 1687118641 287749 681857bc8c60cccdd8ca00cab814b93c ""
+  "/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-dvips.def" 1704491087 35584 af40d1a4049cb0a7cc2b70833befa00b ""
+  "/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty" 1705955748 6565 cfd9fd0a1d5f5ad985151778771ff7a9 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty" 1696969620 4674 15ab6bdfc97f65b00e59c2867851f715 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/var/lib/texmf/web2c/pdftex/latex.fmt" 1777527159 6897992 ab624938dd81e9964e92fecf73d5c6cc ""
+  "2611193_HeizoNakai_visual_media_processing1_lecture1.aux" 1779105315.20789 32 3985256e7290058c681f74d7a3565a19 "latex"
+  "everyhook.sty" 0 -1 0 ""
+  "main.tex" 1779105302.3801 4983 2706d4ac30a5e4a5e650c15c8acadb3b ""
+  (generated)
+  "2611193_HeizoNakai_visual_media_processing1_lecture1.aux"
+  "2611193_HeizoNakai_visual_media_processing1_lecture1.dvi"
+  "2611193_HeizoNakai_visual_media_processing1_lecture1.log"
+  (rewritten before read)
