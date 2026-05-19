@@ -1,0 +1,15 @@
+PWD /mnt/c/Users/nheiz/naist-coursework/heizo_reports/visual-media-processing-1/dai1kai
+INPUT /etc/texmf/web2c/texmf.cnf
+INPUT /usr/share/texmf/web2c/texmf.cnf
+INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/latex.fmt
+INPUT main.tex
+OUTPUT 2611193_HeizoNakai_visual_media_processing1_dai1kai.log
+INPUT /home/hnakai/texmf/tex/luatex/luatexja/ltjsarticle.cls
+INPUT /home/hnakai/texmf/tex/luatex/luatexja/ltjsarticle.cls
+INPUT /home/hnakai/texmf/tex/luatex/luatexja/luatexja.sty
+INPUT /home/hnakai/texmf/tex/luatex/luatexja/luatexja.sty
+INPUT /home/hnakai/texmf/tex/luatex/luatexja/luatexja-core.sty
+INPUT /home/hnakai/texmf/tex/luatex/luatexja/luatexja-core.sty
+INPUT /home/hnakai/texmf/tex/generic/infwarerr/infwarerr.sty
+INPUT /home/hnakai/texmf/tex/generic/infwarerr/infwarerr.sty

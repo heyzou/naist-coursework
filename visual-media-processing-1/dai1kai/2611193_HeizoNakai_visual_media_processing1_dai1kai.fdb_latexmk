@@ -1,0 +1,22 @@
+# Fdb version 4
+["dvipdf"] 0 "2611193_HeizoNakai_visual_media_processing1_dai1kai.dvi" "2611193_HeizoNakai_visual_media_processing1_dai1kai.pdf" "2611193_HeizoNakai_visual_media_processing1_dai1kai" 0 -1
+  "2611193_HeizoNakai_visual_media_processing1_dai1kai.dvi" 0 -1 0 "latex"
+  (generated)
+  "2611193_HeizoNakai_visual_media_processing1_dai1kai.pdf"
+  (rewritten before read)
+["latex"] 1779173901.29767 "main.tex" "2611193_HeizoNakai_visual_media_processing1_dai1kai.dvi" "2611193_HeizoNakai_visual_media_processing1_dai1kai" 1779173901.4812 2
+  "/etc/texmf/web2c/texmf.cnf" 1777527148.4352 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/hnakai/texmf/tex/generic/infwarerr/infwarerr.sty" 1575499628 8356 7bbb2c2373aa810be568c29e333da8ed ""
+  "/home/hnakai/texmf/tex/luatex/luatexja/ltjsarticle.cls" 1708376374 54048 93eefc8b4e019ecace6b76a007000556 ""
+  "/home/hnakai/texmf/tex/luatex/luatexja/luatexja-core.sty" 1708337506 29891 95fb1b438599889b63eb75ea39dd702b ""
+  "/home/hnakai/texmf/tex/luatex/luatexja/luatexja.sty" 1708337506 1973 29a03955e3dfdf207d91a8e3161fada3 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/var/lib/texmf/web2c/pdftex/latex.fmt" 1777527159 6897992 ab624938dd81e9964e92fecf73d5c6cc ""
+  "2611193_HeizoNakai_visual_media_processing1_dai1kai.aux" 1779173901.24142 32 3985256e7290058c681f74d7a3565a19 "latex"
+  "main.tex" 1779173816.27893 12125 f8eeb1f04707b05835e50dcc53a160e8 ""
+  (generated)
+  "2611193_HeizoNakai_visual_media_processing1_dai1kai.aux"
+  "2611193_HeizoNakai_visual_media_processing1_dai1kai.dvi"
+  "2611193_HeizoNakai_visual_media_processing1_dai1kai.log"
+  (rewritten before read)
