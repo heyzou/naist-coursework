@@ -26,28 +26,13 @@
 氏名: 中井 平蔵
 \end{flushright}
 
-\section*{課題}
-\begin{enumerate}
-  \item スライド24ページの回転表現（オイラー角、回転行列、Rodrigues 表現、クォータニオン）の相互変換方法を説明する。
-  \item 次のカメラに対して透視投影行列を求める。
-  \begin{itemize}
-    \item 焦点距離: $f=50\ \mathrm{mm}$
-    \item センササイズ: $33.6\ \mathrm{mm}\times 22.4\ \mathrm{mm}$
-    \item 画素数: $6720\times 4480\ \mathrm{pixel}$
-    \item 視線軸はセンサ中心を通る（主点は画像中心）
-  \end{itemize}
-\end{enumerate}
-
 \section*{解答}
-\subsection*{1. 回転表現の相互変換}
+\subsection*{1. 各回転表現方法の定義とそれらの相互変換}
 \setlength{\parindent}{1em}
 \setlength{\leftskip}{1em}
-3次元回転は同じ姿勢を表していても、表し方が複数ある。まず各表現が
-何を意味しているかを整理し、その後で相互変換の方法を述べる。
-
 \subsubsection*{(0) 各表現の定義}
 \begin{itemize}
-  \item オイラー角: 3つの回転を順に適用して姿勢を表す方法であり、3つの角 $(\phi,\theta,\psi)$ で記述する。ただし、回転順序を指定する必要がある。
+  \item オイラー角: 3次元空間における任意の回転を、3本の軸のまわりに、指定した順序で3回連続して回転させる角度の組み合わせで表す手法である。
   \begin{itemize}
     \item 長所: 3つの角で直感的に姿勢を表しやすい。
     \item 短所: 回転順序に依存する。
@@ -64,32 +49,41 @@
     \item 短所: 9成分で表すため冗長である。
     \item 短所: 数値誤差で直交性が崩れることがある。
   \end{itemize}
-  \item Rodrigues 表現: 「どの軸の回りに」「何度回すか」で表す方法であり、単位ベクトル $\mathbf{n}=(n_x,n_y,n_z)^\top$ と回転角 $\theta$ の組 $(\mathbf{n},\theta)$ で表される。
+  \item ロドリゲス表現: 3次元空間における任意の回転を、「1本の回転軸」と「その軸のまわりに回転させる角度」の組み合わせで表す手法であり、単位ベクトル $\mathbf{n}=(n_x,n_y,n_z)^\top$ と回転角 $\theta$ の組 $(\mathbf{n},\theta)$ で表される。
   \begin{itemize}
-    \item 長所: 回転軸と回転角が明確で意味が分かりやすい。
     \item 長所: 3自由度で表せるので最適化で使いやすい。
-    \item 短所: $\theta \approx 0$ の近くで扱いに注意が必要である。
-    \item 短所: 行列演算に直接は使いにくい。
+    \item 短所: $\theta=0,\pi,2\pi$ 付近では特異点により計算が不安定になりやすい。
   \end{itemize}
-  \item クォータニオン: 4成分
+  \item クォータニオン: 3次元空間における回転を、複素数を拡張した「4つの数字（実部1つと虚部3つ）」の組み合わせで表す手法である。
+  \[
+  q = w + xi + yj + zk
+  \]
+  また、
   \[
   q=(w,x,y,z),\qquad \|q\|=1
   \]
-  で回転を表す方法である。回転の合成や補間に向いており、数値計算でも安定しやすい。
+  このとき、虚数単位 $i,j,k$ の掛け算のルールは
+  \[
+  i^2=j^2=k^2=ijk=-1
+  \]
+  である。さらに、異なる虚数単位同士の掛け算は
+  \[
+  ij=k,\quad jk=i,\quad ki=j
+  \]
+  \[
+  ji=-k,\quad kj=-i,\quad ik=-j
+  \]
+  と循環する（順方向は正、逆方向は負）。
   \begin{itemize}
     \item 長所: ジンバルロックを避けられる。
-    \item 長所: 補間や連続回転の計算に向いている。
     \item 短所: 4成分の意味が直感的には分かりにくい。
     \item 短所: 常に正規化して使う必要がある。
   \end{itemize}
 \end{itemize}
-以下ではベクトルは列ベクトルとし、回転行列を中間表現として用いる。
-
 \subsubsection*{(a) 3×3回転行列 $\leftrightarrow$ オイラー角}
 \hspace*{2em}\textbf{(a-1) オイラー角 $\rightarrow$ 回転行列}
 
-回転順序を ZYX（yaw-pitch-roll）と固定し、角度を
-$\psi$（$z$軸）、$\theta$（$y$軸）、$\phi$（$x$軸）とする。
+回転順序を ZYX と固定し、角度を $\psi$（$z$軸）、$\theta$（$y$軸）、$\phi$（$x$軸）とすると、それぞれの軸の回転行列は、
 \[
 R_x(\phi)=
 \begin{bmatrix}
@@ -110,10 +104,13 @@ R_z(\psi)=
 0&0&1
 \end{bmatrix}
 \]
-とすると、
+
+となり、
+
 \[
 R = R_z(\psi)R_y(\theta)R_x(\phi)
 \]
+
 で回転行列を得る。つまり、オイラー角から回転行列への変換では、
 各軸回りの回転行列を定義し、指定した順序で行列積を取ればよい。
 
@@ -125,24 +122,17 @@ R = R_z(\psi)R_y(\theta)R_x(\phi)
 \phi = \mathrm{atan2}(r_{32},r_{33}),\quad
 \psi = \mathrm{atan2}(r_{21},r_{11})
 \]
-で求める（この式は ZYX 順専用）。すなわち、回転行列の各要素を
+で求める。この式は ZYX 順専用である。すなわち、回転行列の各要素を
 読み取って、三角関数の逆関数から角度を復元する。
-ジンバルロックとは、3つの回転軸のうち2つの軸が重なってしまい、
-本来は3自由度あるはずの回転が実質的に2自由度としてしか扱えなくなる
-現象である。オイラー角では回転を順番に適用するため、特定の角度になると
-途中の回転によって後続の軸と先行の軸が一致し、異なる角度の組が同じ姿勢を
-表すようになる。これにより、ある軸回りの回転を他の軸回りの回転と区別して
-求められなくなる。
-注意として、$\cos\theta\approx 0$
-（$\theta\approx\pm\frac{\pi}{2}$）ではジンバルロックが起こり、角度 $\phi$ と $\psi$
-を一意に分離できないため、別の式や別表現への切替が必要である。
 
-\subsubsection*{(b) 回転行列 $\leftrightarrow$ Rodrigues 表現（軸角）}
-回転軸の単位ベクトルを $\mathbf{n}=(n_x,n_y,n_z)^\top$、回転角を $\theta$ とすると、
+\subsubsection*{(b) 回転行列 $\leftrightarrow$ ロドリゲス表現}
+回転軸の単位ベクトルを $\mathbf{n}=(n_x,n_y,n_z)^\top$、回転角を $\theta$ とすると、ロドリゲスの回転公式より、回転行列は以下のようになる。
 \[
 R = I + \sin\theta\,[\mathbf{n}]_\times + (1-\cos\theta)[\mathbf{n}]_\times^2
 \]
-（Rodrigues の回転公式）である。ここで
+である。ここで
+ベクトル $\mathbf{n}$ との外積の計算を、3×3の行列演算として表したものが
+「反対称行列」である。
 \[
 [\mathbf{n}]_\times=
 \begin{bmatrix}
@@ -170,17 +160,7 @@ $\mathbf{v}_{\mathrm{rot}}$ は
 + (\mathbf{n}\times\mathbf{v})\sin\theta
 + \mathbf{n}(\mathbf{n}\cdot\mathbf{v})(1-\cos\theta)
 \]
-と書ける。第1項は元の向きの残り、第2項は軸周りの回転成分、
-第3項は回転軸方向成分の保存を表している。
-したがって、Rodrigues 表現と回転行列の変換では、
-「軸と角度から Rodrigues の回転公式で行列を作る」
-または
-「回転行列のトレースと反対称成分から軸と角度を取り出す」
-という流れになる。
-実装ではまず $\theta$ を計算し、$\theta$ が十分小さいときは
-$\mathbf{n}$ を前回値で保持するか、
-$\mathbf{n}\theta$（回転ベクトル）で直接扱うと安定する。
-
+と書ける。
 \subsubsection*{(c) 回転行列 $\leftrightarrow$ クォータニオン}
 単位クォータニオンを
 \[
@@ -205,14 +185,11 @@ x=\frac{r_{32}-r_{23}}{4w},\
 y=\frac{r_{13}-r_{31}}{4w},\ 
 z=\frac{r_{21}-r_{12}}{4w}.
 \]
-ただし数値安定のため、実装では「$r_{11}$ と $r_{22}$ と $r_{33}$ のうち最大の対角成分」
-を基準に分岐して計算する方法が広く使われる。最後に
-$q\leftarrow q/\|q\|$ と正規化する。
 つまり、クォータニオンと回転行列の変換では、
 クォータニオンの4成分から行列要素を組み立てる方法と、
 行列の対角和や非対角成分から4成分を復元する方法を用いる。
 
-\subsubsection*{(d) Rodrigues 表現 $\leftrightarrow$ クォータニオン}
+\subsubsection*{(d) ロドリゲス表現 $\leftrightarrow$ クォータニオン}
 軸角 $(\mathbf{n},\theta)$ から
 \[
 q=
@@ -227,73 +204,64 @@ n_z\sin\frac{\theta}{2}\right)
 \mathbf{n}=\frac{1}{\sin(\theta/2)}(x,y,z)^\top
 \]
 で軸角に戻せる（$\sin(\theta/2)\approx 0$ では軸は任意に近い）。
-ここでは、回転角の半分 $\theta/2$ を使うことが特徴である。
-
-\subsubsection*{(e) 実用上の変換フロー}
-直接式をすべて個別に覚えるより、次のように回転行列 $R$ を中間に置くと整理しやすい。
+\subsubsection*{(e) 中間表現を経由した相互変換}
+次のように回転行列 $R$ を中間に置くと、その他の変換も同様に経由して求められる。
 \begin{itemize}
-  \item オイラー角 $\rightarrow R \rightarrow q$（姿勢推定・補間でよく使う）
-  \item $q \rightarrow R \rightarrow$ オイラー角（表示用の角度に戻す）
-  \item Rodrigues $\rightarrow R \rightarrow q$（最適化変数から姿勢へ）
+  \item オイラー角 $\rightarrow R \rightarrow q$
+  \item $q \rightarrow R \rightarrow$ オイラー角
+  \item ロドリゲス $\rightarrow R \rightarrow q$
 \end{itemize}
-どの経路でも、最終段階で
-\begin{itemize}
-  \item 回転行列なら直交性（$R^\top R\approx I$）を確認
-  \item クォータニオンなら正規化（$\|q\|=1$）
-\end{itemize}
-を行うと、数値誤差の蓄積を抑えられる。
-
 \setlength{\leftskip}{0em}
 \subsection*{2. 透視投影行列の計算}
-\subsubsection*{(1) スライドの式}
-添付スライドでは、カメラ座標系の点
+授業資料より、カメラ座標系の点
+
 \[
 \mathbf{X}_c=
 \begin{bmatrix}
 X\\Y\\Z\\1
 \end{bmatrix}
 \]
-に対して、透視投影変換は
+
+に対して、透視投影変換は以下である。
+
 \[
-\begin{bmatrix}hx\\hy\\h\end{bmatrix}=\begin{bmatrix}s&0&x_0\\0&s&y_0\\0&0&1\end{bmatrix}\begin{bmatrix}f&0&0&0\\0&f&0&0\\0&0&1&0\end{bmatrix}\begin{bmatrix}X\\Y\\Z\\1\end{bmatrix}
+\begin{bmatrix}hx\\hy\\h\end{bmatrix}
+=\begin{bmatrix}s&0&x_0\\0&s&y_0\\0&0&1\end{bmatrix}\begin{bmatrix}f&0&0&0\\0&f&0&0\\0&0&1&0\end{bmatrix}\begin{bmatrix}X\\Y\\Z\\1\end{bmatrix}
+=\begin{bmatrix}sf&0&x_0&0\\0&sf&y_0&0\\0&0&1&0\end{bmatrix}\begin{bmatrix}X\\Y\\Z\\1\end{bmatrix}
 \]
-と書ける。これをまとめると
-\[
-\begin{bmatrix}hx\\hy\\h\end{bmatrix}=\begin{bmatrix}sf&0&x_0&0\\0&sf&y_0&0\\0&0&1&0\end{bmatrix}\begin{bmatrix}X\\Y\\Z\\1\end{bmatrix}
-\]
-である。ここで、
+
+ここで、
 \begin{itemize}
   \item $f$ は焦点距離
   \item $s$ は mm を pixel に変換するスケール
-  \item $x_0,y_0$ は画像中心（主点）
+  \item $x_0,y_0$ は画像中心
 \end{itemize}
 を表す。
 
-\subsubsection*{(2) 与えられたカメラのパラメータ}
-画素ピッチ（1画素あたりの長さ）は
+1 mm あたりの画素数は、
 \[
-p_x=\frac{33.6}{6720}=0.005\ \mathrm{mm/pixel},\quad
-p_y=\frac{22.4}{4480}=0.005\ \mathrm{mm/pixel}.
-\]
-したがって、1 mm あたりの画素数は
-\[
-s_x=s_y=\frac{1}{0.005}=200\ \mathrm{pixel/mm}.
-\]
-スライドの式ではこの値がスケール $s$ に対応するので、
-\[
-s=200.
-\]
-また、焦点距離は $f=50\ \mathrm{mm}$ なので
-\[
-sf=200\times 50=10000.
-\]
-主点は視線軸がセンサ中心を通るので画像中心となり、
-\[
-c_x=x_0=\frac{6720}{2}=3360,\quad
-c_y=y_0=\frac{4480}{2}=2240.
+s_x=\frac{6720}{33.6}=200\ \mathrm{pixel/mm},\quad
+s_y=\frac{4480}{22.4}=200\ \mathrm{pixel/mm}
 \]
 
-\subsubsection*{(3) 透視投影行列}
+スライドの式ではこの値がスケール $s$ に対応するので、
+
+\[
+s=200
+\]
+
+また、焦点距離は $f=50\ \mathrm{mm}$であるため、
+\[
+sf=200\times 50=10000
+\]
+
+視線軸がセンサ中心を通るので画像中心は、
+
+\[
+c_x=x_0=\frac{6720}{2}=3360,\quad
+c_y=y_0=\frac{4480}{2}=2240
+\]
+
 以上をスライドの式に代入すると、
 \[
 P=
@@ -301,7 +269,7 @@ P=
 10000 & 0 & 3360\\
 0 & 10000 & 2240\\
 0 & 0 & 1
-\end{bmatrix}.
+\end{bmatrix}
 \begin{bmatrix}
 50 & 0 & 0 & 0\\
 0 & 50 & 0 & 0\\
@@ -312,8 +280,9 @@ P=
 10000 & 0 & 3360 & 0\\
 0 & 10000 & 2240 & 0\\
 0 & 0 & 1 & 0
-\end{bmatrix}.
+\end{bmatrix}
 \]
+
 よって、このカメラの透視投影行列は
 \[
 \boxed{
@@ -325,28 +294,7 @@ P=
 \end{bmatrix}
 }
 \]
+
 となる。
-
-\subsubsection*{(4) 画像座標の式}
-したがって、3次元点 $\mathbf{X}=(X,Y,Z,1)^\top$ に対して
-\[
-\lambda
-\begin{bmatrix}
-u\\v\\1
-\end{bmatrix}
-=
-P\mathbf{X},\quad
-u=\frac{10000X+3360Z}{Z},\ 
-v=\frac{10000Y+2240Z}{Z}.
-\]
-となる。すなわち、
-\[
-u=10000\frac{X}{Z}+3360,\qquad
-v=10000\frac{Y}{Z}+2240
-\]
-であり、透視投影により $X/Z,\ Y/Z$ の形で画素座標が決まることが分かる。
-
-\section*{考察}
-回転表現はそれぞれ長所が異なる。回転行列は合成が容易だが冗長、オイラー角は直感的だがジンバルロックがある。Rodrigues（軸角）は最小3自由度で最適化に使いやすく、クォータニオンは補間（SLERP）と数値安定性に優れる。用途に応じて表現を切り替え、最終的に投影計算では行列形式へ統一するのが実装上有効である。
 
 \end{document}

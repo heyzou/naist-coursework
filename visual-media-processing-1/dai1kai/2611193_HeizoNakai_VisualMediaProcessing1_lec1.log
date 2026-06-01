@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2026.4.30)  19 MAY 2026 16:04
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)  (format=lualatex 2026.4.30)  19 MAY 2026 20:42
  restricted system commands enabled.
 **main.tex
 (./main.tex
@@ -8,8 +8,8 @@ Lua module: luaotfload 2023-08-31 3.26 Lua based OpenType font support
 Lua module: lualibs 2023-07-13 2.76 ConTeXt Lua standard libraries.
 Lua module: lualibs-extended 2023-07-13 2.76 ConTeXt Lua libraries -- extended c
 ollection.
-luaotfload | conf : Root cache directory is ".texmf-var/luatex-cache/generic/nam
-es".
+luaotfload | conf : Root cache directory is "/home/hnakai/.texlive2023/texmf-var
+/luatex-cache/generic/names".
 luaotfload | init : Loading fontloader "fontloader-2023-08-19.lua" from kpse-res
 olved path "/usr/share/texlive/texmf-dist/tex/luatex/luaotfload/fontloader-2023-
 08-19.lua".
@@ -20,8 +20,8 @@ Inserting `luaotfload.node_processor' in `hpack_filter'.
 Inserting `luaotfload.glyph_stream' in `glyph_stream_provider'.
 Inserting `luaotfload.define_font' in `define_font'.
 Lua-only attribute luaotfload_color_attribute = 2
-luaotfload | conf : Root cache directory is ".texmf-var/luatex-cache/generic/nam
-es".
+luaotfload | conf : Root cache directory is "/home/hnakai/.texlive2023/texmf-var
+/luatex-cache/generic/names".
 Inserting `luaotfload.harf.strip_prefix' in `find_opentype_file'.
 Inserting `luaotfload.harf.strip_prefix' in `find_truetype_file'.
 Removing  `luaotfload.glyph_stream' from `glyph_stream_provider'.
@@ -298,8 +298,9 @@ LaTeX Info: Redefining \fontshapeforce on input line 955.
 )
 (/usr/share/texlive/texmf-dist/tex/luatex/luatexja/patches/lltjdefs.sty
 Package: lltjdefs 2022-01-23 Default font settings of LuaTeX-ja
-luaotfload | db : Font names database loaded from .texmf-var/luatex-cache/generi
-c/names/luaotfload-names.luc.gz(load cache: extra_lmroman10-regular.luc)
+luaotfload | db : Font names database loaded from /home/hnakai/.texlive2023/texm
+f-var/luatex-cache/generic/names/luaotfload-names.luc.gz(load cache: extra_lmrom
+an10-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 (Font)              scaled to size 9.24713pt on input line 79.
 
@@ -583,8 +584,8 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 Package: luatexja-fontspec-27c 2020-04-04 fontspec support of LuaTeX-ja
 \g__ltj_fontspec_altnumber_int=\count300
 ))
-luaotfload | cache : Lookup cache loaded from .texmf-var/luatex-cache/generic/na
-mes/luaotfload-lookup-cache.luc.
+luaotfload | cache : Lookup cache loaded from /home/hnakai/.texlive2023/texmf-va
+r/luatex-cache/generic/names/luaotfload-lookup-cache.luc.
 
 Package fontspec Info: Could not resolve font "HaranoAjiMincho-Regular/BI" (it
 (fontspec)             probably doesn't exist).
@@ -817,24 +818,24 @@ LaTeX Font Info:    Font shape `JT3/HaranoAjiGothic-Medium(0)/m/n' will be
 LaTeX Font Info:    Font shape `JY3/HaranoAjiGothic-Medium(0)/m/n' will be
 (Font)              scaled to size 11.09656pt on input line 42.
 LaTeX Font Info:    Font shape `JT3/HaranoAjiGothic-Medium(0)/m/n' will be
-(Font)              scaled to size 9.24713pt on input line 48.
+(Font)              scaled to size 9.24713pt on input line 47.
 LaTeX Font Info:    Font shape `JY3/HaranoAjiGothic-Medium(0)/m/n' will be
-(Font)              scaled to size 9.24713pt on input line 48.
+(Font)              scaled to size 9.24713pt on input line 47.
 (load cache: extra_lmsans10-regular.luc)
 LaTeX Font Info:    Font shape `JT3/HaranoAjiMincho-Regular(0)/b/n' will be
-(Font)              scaled to size 9.24713pt on input line 52.
+(Font)              scaled to size 9.24713pt on input line 51.
 LaTeX Font Info:    Font shape `JY3/HaranoAjiMincho-Regular(0)/b/n' will be
-(Font)              scaled to size 9.24713pt on input line 52.
+(Font)              scaled to size 9.24713pt on input line 51.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}](load cache: extra_lmromande
-mi10-regular.luc)
+{/home/hnakai/.texlive2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}](load c
+ache: extra_lmromandemi10-regular.luc)
 LaTeX Font Info:    Font shape `JY3/HaranoAjiGothic-Medium(0)/m/n' will be
-(Font)              scaled to size 6.47295pt on input line 67.
+(Font)              scaled to size 6.47295pt on input line 66.
 LaTeX Font Info:    Font shape `JY3/HaranoAjiGothic-Medium(0)/m/n' will be
-(Font)              scaled to size 4.62357pt on input line 67.
- [2] [3] [4] [5] [6]
-(./2611193_HeizoNakai_VisualMediaProcessing1_lec1.aux)
+(Font)              scaled to size 4.62357pt on input line 66.
+ [2] [3] [4] [5]
+[6] (./2611193_HeizoNakai_VisualMediaProcessing1_lec1.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -848,30 +849,30 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Here is how much of LuaTeX's memory you used:
  7554 strings out of 476553
  156562,1977958 words of node,token memory allocated
- 1655 words of node memory still in use:
-   10 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 1 glyph, 476 attribute, 56 glue_sp
-ec, 54 attribute_list, 1 write, 13 user_defined nodes
-   avail lists: 1:29,2:39681,3:347,4:228,5:171,6:50,7:4545,8:57,9:1679,10:29,11:
-10
+ 1559 words of node memory still in use:
+   10 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 1 glyph, 432 attribute, 56 glue_sp
+ec, 50 attribute_list, 1 write, 13 user_defined nodes
+   avail lists: 1:32,2:38573,3:330,4:305,5:177,6:56,7:4497,8:52,9:1678,10:29,11:
+8
  29361 multiletter control sequences out of 65536+600000
  73 fonts using 91097839 bytes
  125i,8n,128p,1770b,361s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</home/hnakai/texmf/fonts/opentype/public/lm/lmroman7-regular.otf></home/hnakai/
-texmf/fonts/opentype/public/lm/lmromandemi10-regular.otf></home/hnakai/texmf/fon
-ts/opentype/public/lm/lmroman10-bold.otf></home/hnakai/texmf/fonts/opentype/publ
-ic/lm/lmsans10-regular.otf></home/hnakai/texmf/fonts/opentype/public/lm/lmsans12
--regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/public/haranoaji/Hara
-noAjiGothic-Medium.otf></home/hnakai/texmf/fonts/opentype/public/lm/lmroman10-re
-gular.otf></home/hnakai/texmf/fonts/opentype/public/lm/lmroman12-bold.otf></usr/
-share/texlive/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiMincho-Regular
-.otf></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy7.pfb>
-Output written on 2611193_HeizoNakai_VisualMediaProcessing1_lec1.pdf (6 pages, 182351 bytes).
+</usr/share/texmf/fonts/opentype/public/lm/lmroman7-regular.otf></usr/share/texm
+f/fonts/opentype/public/lm/lmromandemi10-regular.otf></usr/share/texmf/fonts/ope
+ntype/public/lm/lmroman10-bold.otf></usr/share/texmf/fonts/opentype/public/lm/lm
+sans10-regular.otf></usr/share/texmf/fonts/opentype/public/lm/lmsans12-regular.o
+tf></usr/share/texlive/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiGothi
+c-Medium.otf></usr/share/texmf/fonts/opentype/public/lm/lmroman10-regular.otf></
+usr/share/texmf/fonts/opentype/public/lm/lmroman12-bold.otf></usr/share/texlive/
+texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiMincho-Regular.otf></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy7.pfb>
+Output written on 2611193_HeizoNakai_VisualMediaProcessing1_lec1.pdf (6 pages, 178437 bytes).
 
 PDF statistics: 114 PDF objects out of 1000 (max. 8388607)
  71 compressed objects within 1 object stream

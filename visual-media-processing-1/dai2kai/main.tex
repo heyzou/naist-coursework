@@ -1,0 +1,122 @@
+\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{luatexja-fontspec}
+\setmainjfont{HaranoAjiMincho-Regular}
+\setsansjfont{HaranoAjiGothic-Medium}
+\linespread{1.05}\selectfont
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{視覚メディア処理I 第2回レポート}}
+\end{center}
+\vspace{1em}
+
+\begin{flushright}
+提出日: \today \\
+学籍番号: 2611193 \\
+氏名: 中井 平蔵
+\end{flushright}
+
+\section*{解答}
+
+\subsection*{1. Zバッファ法とその特徴、長所・短所}
+
+Zバッファ法とは、3次元物体を2次元画面に描画するときに、各画素に対して
+「現在その画素に描かれている点の奥行き値」を記録しておき、手前にある面だけを
+表示するための方法である。
+
+具体的には、三角形ポリゴンをラスタライズするとき、各画素に対応する奥行き
+$z$ を計算する。そして、その画素にすでに保存されている奥行き値 $z_{\mathrm{buf}}$
+と比較する。以下の条件を満たす時、その画素の色と奥行き値を新しいものに更新する。
+\[
+z < z_{\mathrm{buf}}
+\]
+
+\subsubsection*{長所}
+\begin{itemize}
+  \item 実装が単純であり、各画素について奥行き値を比較するだけで隠面消去を行える。
+  \item ポリゴンを奥行き順にソートする必要がないため、交差するポリゴンや複雑なシーンにも適用しやすい。
+\end{itemize}
+
+\subsubsection*{短所}
+\begin{itemize}
+  \item 各画素に奥行き値を保存するため、追加のメモリが必要となる。
+  \item Zバッファは有限のビット数で奥行き値を表現するため、互いに非常に近い奥行きに位置する面では、前後関係の判定が不安定になり、Z-fighting が発生する場合がある。
+  \item 透明物体の描画は、単純なZバッファだけでは正しく扱いにくい。透明面では奥の色も合成する必要があるため、追加処理が必要になる。
+\end{itemize}
+
+\subsection*{2. 三角形と線分の交差判定}
+
+問題文より、3次元空間において、三角形 $F_1$ の３つの頂点は
+\[
+\mathbf{v}_1=(x_1,y_1,z_1)^\top,\quad
+\mathbf{v}_2=(x_2,y_2,z_2)^\top,\quad
+\mathbf{v}_3=(x_3,y_3,z_3)^\top
+\]
+
+である。また、線分 $L_1$ は原点から
+\[
+\mathbf{p}=(p_x,p_y,p_z)^\top
+\]
+
+までの線分である。この線分上の点は、パラメータ $t$ を用いて
+
+\[
+\mathbf{r}(t)=t\mathbf{p},\qquad 0\leq t\leq 1
+\]
+
+と書ける。
+
+線分と三角形が交差するのは、線分上の点と三角形上の点が一致するときである。
+三角形と同一平面上の点は、
+
+\[
+\mathbf{e}_1=\mathbf{v}_2-\mathbf{v}_1,\qquad
+\mathbf{e}_2=\mathbf{v}_3-\mathbf{v}_1
+\]
+
+と重心座標 $u,v$ を用いて
+
+\[
+\mathbf{q}(u,v)=\mathbf{v}_1+u\mathbf{e}_1+v\mathbf{e}_2
+\]
+
+と表せる。この点が三角形の内部にある条件は、
+\[
+u\geq 0,\qquad v\geq 0,\qquad u+v\leq 1
+\]
+
+である。
+
+したがって、線分と三角形が交差するかどうかは
+\[
+t\mathbf{p}=\mathbf{v}_1+u\mathbf{e}_1+v\mathbf{e}_2
+\Rightarrow
+\begin{bmatrix}\mathbf{p} & -\mathbf{e}_1 & -\mathbf{e}_2\end{bmatrix}\begin{bmatrix}t\\u\\v\end{bmatrix}=\mathbf{v}_1 \Rightarrow \begin{bmatrix}t\\u\\v\end{bmatrix}=\begin{bmatrix}\mathbf{p} & -\mathbf{e}_1 & -\mathbf{e}_2\end{bmatrix}^{-1}\mathbf{v}_1
+\]
+
+の解$t,u,v$が以下の条件を満たすかどうかを調べれば良い。
+
+\[
+0\leq t\leq 1,\qquad u\geq 0,\qquad v\geq 0,\qquad u+v\leq 1
+\]
+
+よって、判定手順は次のようになる。
+\begin{enumerate}
+  \item $\mathbf{e}_1=\mathbf{v}_2-\mathbf{v}_1$、$\mathbf{e}_2=\mathbf{v}_3-\mathbf{v}_1$ を計算する。
+  \item 行列 $A=\begin{bmatrix}\mathbf{p}&-\mathbf{e}_1&-\mathbf{e}_2\end{bmatrix}$ を作り、$\det A$ を計算する。
+  \item $\det A\approx 0$ の場合、線分が三角形の平面とほぼ平行であるため、\fbox{交差しない}と判定する。
+  \item $\det A\neq 0$ の場合、連立方程式 $A(t,u,v)^\top=\mathbf{v}_1$ を解く。
+  \item 得られた値が
+  \[
+  0\leq t\leq 1,\qquad u\geq 0,\qquad v\geq 0,\qquad u+v\leq 1
+  \]
+  をすべて満たすなら、線分 $L_1$ は三角形 $F_1$ と \fbox{交差する}。
+  \item どれか1つでも満たさなければ、\fbox{交差しない}。
+\end{enumerate}
+
+\end{document}
