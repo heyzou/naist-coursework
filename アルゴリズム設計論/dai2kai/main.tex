@@ -1,0 +1,225 @@
+\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{luatexja-fontspec}
+\setmainjfont{HaranoAjiMincho-Regular}
+\setsansjfont{HaranoAjiGothic-Medium}
+\linespread{1.05}\selectfont
+
+% Recommended PDF filename:
+% アルゴリズム設計論_repo2_2611193_中井平蔵.pdf
+% Example build command:
+% latexmk -lualatex -jobname=アルゴリズム設計論_repo2_2611193_中井平蔵 main.tex
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{アルゴリズム設計論 第2回レポート}}
+\end{center}
+\vspace{1em}
+
+\begin{flushright}
+提出日: \today \\
+学籍番号: 2611193 \\
+氏名: 中井 平蔵
+\end{flushright}
+
+\section*{1.}
+Shorのアルゴリズムは、RSA暗号における「大きな合成数の素因数分解は計算量的に困難である」という仮定を破る。
+RSA暗号では、公開鍵に含まれる大きな合成数 $N$ が、2つの大きな素数 $p$ と $q$ の積 $N = pq$ であることを利用している。
+RSAの安全性は、$N$ が公開されていても、そこから $p$ と $q$ を求める素因数分解が現実的な時間では困難である、
+という計算量的仮定に依存している。
+
+しかし、Shorのアルゴリズムを用いると、量子コンピュータ上では素因数分解を多項式時間で解くことができる。
+具体的には、$N$ のビット長を $n = \log N$ とすると、
+Shorのアルゴリズムは $O(n^3)$ の時間計算量で素因数分解を行えるとされる。
+これは、現在の古典コンピュータの素因数分解アルゴリズムよりも大幅に高速である。
+
+\begin{center}
+\fbox{\begin{tabular}{@{}l@{}}
+したがって、Shorのアルゴリズムは、RSA暗号の安全性の根拠である\\
+「素因数分解は計算量的に困難である」という計算量的仮定を破るアルゴリズムである。
+\end{tabular}}
+\end{center}
+
+\section*{2.}
+\subsection*{(1) どのような測定結果がどのような確率で得られるか}
+観測量 $Y$ の測定結果は、その固有値として得られる。まず、$Y$ の固有値を求めるために固有方程式
+\[
+\det(Y - \lambda I) = 0
+\]
+
+を解く。
+\[
+\det \begin{pmatrix}
+-\lambda & -i \\
+i & -\lambda
+\end{pmatrix}
+= \lambda^2 - 1 = 0
+\]
+
+よって、固有値は
+\[
+\lambda = \pm 1
+\]
+
+である。したがって、測定結果として得られる値は $+1$ または $-1$ の2通りである。
+
+次に、それぞれの固有ベクトルを求める。
+\[
+\lvert y_+\rangle = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+i
+\end{pmatrix}
+= \frac{1}{\sqrt{2}}\lvert 0\rangle + \frac{i}{\sqrt{2}}\lvert 1\rangle
+\]
+
+\[
+\lvert y_-\rangle = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+-i
+\end{pmatrix}
+= \frac{1}{\sqrt{2}}\lvert 0\rangle - \frac{i}{\sqrt{2}}\lvert 1\rangle
+\]
+
+状態
+\[
+\lvert \psi\rangle = \frac{1}{\sqrt{3}}\lvert 0\rangle + \frac{\sqrt{2}}{\sqrt{3}}\lvert 1\rangle
+\]
+
+に対して、各測定結果の確率は
+\[
+p = \left|\langle \text{固有状態} \vert \psi\rangle\right|^2
+\]
+
+で与えられる。
+
+初めに、$+1$ が得られる確率は
+\begin{align*}
+\langle y_+ \vert \psi\rangle
+&= \left(\frac{1}{\sqrt{2}}\langle 0\rvert - \frac{i}{\sqrt{2}}\langle 1\rvert\right)
+   \left(\frac{1}{\sqrt{3}}\lvert 0\rangle + \frac{\sqrt{2}}{\sqrt{3}}\lvert 1\rangle\right) \\
+&= \frac{1}{\sqrt{2}}\cdot\frac{1}{\sqrt{3}}\langle 0 \vert 0\rangle
+ + \frac{1}{\sqrt{2}}\cdot\frac{\sqrt{2}}{\sqrt{3}}\langle 0 \vert 1\rangle
+ + \left(-\frac{i}{\sqrt{2}}\right)\cdot\frac{1}{\sqrt{3}}\langle 1 \vert 0\rangle
+ + \left(-\frac{i}{\sqrt{2}}\right)\cdot\frac{\sqrt{2}}{\sqrt{3}}\langle 1 \vert 1\rangle \\
+&= \frac{1}{\sqrt{6}} - \frac{\sqrt{2}i}{\sqrt{6}}
+\end{align*}
+
+ここで、$\langle 0 \vert 1\rangle = \langle 1 \vert 0\rangle = 0$ と
+$\langle 0 \vert 0\rangle = \langle 1 \vert 1\rangle = 1$ を用いると、
+\[
+p_+ = \left|\langle y_+ \vert \psi\rangle\right|^2
+= \left|\frac{1}{\sqrt{6}} - \frac{\sqrt{2}i}{\sqrt{6}}\right|^2
+= \left(\frac{1}{\sqrt{6}}\right)^2 + \left(\frac{\sqrt{2}}{\sqrt{6}}\right)^2
+= \frac{1}{6} + \frac{2}{6}
+= \frac{1}{2}
+\]
+
+である。
+
+同様に、$-1$ が得られる確率は
+\begin{align*}
+\langle y_- \vert \psi\rangle
+&= \left(\frac{1}{\sqrt{2}}\langle 0\rvert + \frac{i}{\sqrt{2}}\langle 1\rvert\right)
+   \left(\frac{1}{\sqrt{3}}\lvert 0\rangle + \frac{\sqrt{2}}{\sqrt{3}}\lvert 1\rangle\right) \\
+&= \frac{1}{\sqrt{2}}\cdot\frac{1}{\sqrt{3}}\langle 0 \vert 0\rangle
+ + \frac{1}{\sqrt{2}}\cdot\frac{\sqrt{2}}{\sqrt{3}}\langle 0 \vert 1\rangle
+ + \frac{i}{\sqrt{2}}\cdot\frac{1}{\sqrt{3}}\langle 1 \vert 0\rangle
+ + \frac{i}{\sqrt{2}}\cdot\frac{\sqrt{2}}{\sqrt{3}}\langle 1 \vert 1\rangle \\
+&= \frac{1}{\sqrt{6}} + \frac{\sqrt{2}i}{\sqrt{6}}
+\end{align*}
+
+よって、
+\[
+p_- = \left|\langle y_- \vert \psi\rangle\right|^2
+= \left|\frac{1}{\sqrt{6}} + \frac{\sqrt{2}i}{\sqrt{6}}\right|^2
+= \left(\frac{1}{\sqrt{6}}\right)^2 + \left(\frac{\sqrt{2}}{\sqrt{6}}\right)^2
+= \frac{1}{6} + \frac{2}{6}
+= \frac{1}{2}
+\]
+
+となる。したがって、
+
+\begin{center}
+\fbox{測定結果は $+1$ と $-1$ であり、それぞれ $\frac{1}{2}$ の確率で得られる。}
+\end{center}
+
+\subsection*{(2) 結果の期待値}
+期待値 $\langle Y \rangle$ は、測定結果とその確率の積の和として
+\[
+\langle Y \rangle = \sum_i p_i \lambda_i
+\]
+
+で計算できる。よって、
+\[
+\langle Y \rangle
+= \left(\frac{1}{2}\right)(+1) + \left(\frac{1}{2}\right)(-1)
+= 0
+\]
+
+となる。したがって、
+
+\begin{center}
+\fbox{結果の期待値は $\langle Y \rangle = 0$ である。}
+\end{center}
+
+\section*{3.}
+未知の量子状態を複製する以下の変換
+\[
+U(\lvert \psi \rangle \lvert 0 \rangle) = \lvert \psi \rangle \lvert \psi \rangle
+\]
+
+が存在しないことを示す。
+
+$U$ が存在すると仮定すると、
+\[
+U(\lvert 0\rangle \lvert 0\rangle) = \lvert 0\rangle \lvert 0\rangle,\qquad
+U(\lvert 1\rangle \lvert 0\rangle) = \lvert 1\rangle \lvert 1\rangle
+\]
+
+に変換される。ここで、線形性より$U(a\lvert 0\rangle\lvert 0\rangle + b\lvert 1\rangle\lvert 0\rangle)$は以下のように変換される。
+\[
+U(a\lvert 0\rangle\lvert 0\rangle + b\lvert 1\rangle\lvert 0\rangle)
+= a\,U(\lvert 0\rangle\lvert 0\rangle) + b\,U(\lvert 1\rangle\lvert 0\rangle)
+= a\lvert 0\rangle\lvert 0\rangle + b\lvert 1\rangle\lvert 1\rangle
+\]
+
+また、
+\[
+\lvert \psi \rangle = a\lvert 0\rangle + b\lvert 1\rangle
+\]
+
+としたとき、
+\[
+U(\lvert \psi\rangle\lvert 0\rangle)
+= U((a\lvert 0\rangle + b\lvert 1\rangle)\lvert 0\rangle)
+= U(a\lvert 0\rangle\lvert 0\rangle + b\lvert 1\rangle\lvert 0\rangle)
+= a\lvert 0\rangle\lvert 0\rangle + b\lvert 1\rangle\lvert 1\rangle
+\]
+
+となる。一方、複製できるなら
+\[
+U(\lvert \psi\rangle \lvert 0\rangle)=\lvert \psi\rangle\lvert \psi\rangle
+\]
+
+でなければならないが、
+\[
+\lvert \psi\rangle\lvert \psi\rangle
+=(a\lvert 0\rangle+b\lvert 1\rangle)(a\lvert 0\rangle+b\lvert 1\rangle)
+= a^2\lvert 0\rangle\lvert 0\rangle + ab\lvert 0\rangle\lvert 1\rangle + ba\lvert 1\rangle\lvert 0\rangle + b^2\lvert 1\rangle\lvert 1\rangle
+\]
+
+となる。よって、
+任意の未知の状態を複製する変換 $U(\lvert \psi\rangle\lvert 0\rangle) = \lvert \psi\rangle\lvert \psi\rangle$ を仮定すると、
+重ね合わせ状態を入力した際に出力が線形性を満たさなくなり、矛盾する。したがって、
+
+\begin{center}
+\fbox{任意の未知の状態を複製する変換 $U(\lvert \psi\rangle\lvert 0\rangle) = \lvert \psi\rangle\lvert \psi\rangle$ は存在しない。}
+\end{center}
+
+\end{document}

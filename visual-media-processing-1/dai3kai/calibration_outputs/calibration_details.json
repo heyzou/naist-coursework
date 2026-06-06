@@ -1,0 +1,394 @@
+[
+  {
+    "set": "Set_A_3",
+    "num_images": 3,
+    "image_size": [
+      1108,
+      1477
+    ],
+    "opencv_rms_px": 0.21803780534370862,
+    "camera_matrix": [
+      [
+        1235.7631292491244,
+        0.0,
+        558.2501745190195
+      ],
+      [
+        0.0,
+        1234.3747090423863,
+        727.9260025123245
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "dist_coeffs": [
+      0.2652530130577478,
+      -1.8309707719335755,
+      -0.0003666538263385251,
+      0.0005292979052343327,
+      4.219451184414917
+    ],
+    "per_image": [
+      {
+        "image": "0.jpg",
+        "rms_px": 0.18226025998592377,
+        "mean_px": 0.1523197442293167,
+        "max_px": 0.47017723321914673,
+        "plot": "calibration_outputs/Set_A_3/reprojection_plots/0_reprojection.jpg"
+      },
+      {
+        "image": "1.jpg",
+        "rms_px": 0.311153382062912,
+        "mean_px": 0.26234328746795654,
+        "max_px": 0.8485183715820312,
+        "plot": "calibration_outputs/Set_A_3/reprojection_plots/1_reprojection.jpg"
+      },
+      {
+        "image": "2.jpg",
+        "rms_px": 0.11218611896038055,
+        "mean_px": 0.09911782294511795,
+        "max_px": 0.32340389490127563,
+        "plot": "calibration_outputs/Set_A_3/reprojection_plots/2_reprojection.jpg"
+      }
+    ]
+  },
+  {
+    "set": "Set_B_7",
+    "num_images": 7,
+    "image_size": [
+      1108,
+      1477
+    ],
+    "opencv_rms_px": 0.29494992664952113,
+    "camera_matrix": [
+      [
+        1141.8438829381,
+        0.0,
+        566.4935055105866
+      ],
+      [
+        0.0,
+        1140.0282274956128,
+        732.1878190093266
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "dist_coeffs": [
+      0.23286626628513313,
+      -1.3495103936848651,
+      -0.0003863132538070923,
+      0.0003661865145354613,
+      2.6088763347205703
+    ],
+    "per_image": [
+      {
+        "image": "0.jpg",
+        "rms_px": 0.2091437578201294,
+        "mean_px": 0.171515092253685,
+        "max_px": 0.5252060890197754,
+        "plot": "calibration_outputs/Set_B_7/reprojection_plots/0_reprojection.jpg"
+      },
+      {
+        "image": "1.jpg",
+        "rms_px": 0.3255811035633087,
+        "mean_px": 0.2726648151874542,
+        "max_px": 0.8674602508544922,
+        "plot": "calibration_outputs/Set_B_7/reprojection_plots/1_reprojection.jpg"
+      },
+      {
+        "image": "2.jpg",
+        "rms_px": 0.10664360970258713,
+        "mean_px": 0.09288276731967926,
+        "max_px": 0.28529486060142517,
+        "plot": "calibration_outputs/Set_B_7/reprojection_plots/2_reprojection.jpg"
+      },
+      {
+        "image": "3.jpg",
+        "rms_px": 0.31828615069389343,
+        "mean_px": 0.2577950358390808,
+        "max_px": 1.0662939548492432,
+        "plot": "calibration_outputs/Set_B_7/reprojection_plots/3_reprojection.jpg"
+      },
+      {
+        "image": "4.jpg",
+        "rms_px": 0.3240746855735779,
+        "mean_px": 0.27862557768821716,
+        "max_px": 0.8566803932189941,
+        "plot": "calibration_outputs/Set_B_7/reprojection_plots/4_reprojection.jpg"
+      },
+      {
+        "image": "5.jpg",
+        "rms_px": 0.35507071018218994,
+        "mean_px": 0.28393158316612244,
+        "max_px": 1.2027803659439087,
+        "plot": "calibration_outputs/Set_B_7/reprojection_plots/5_reprojection.jpg"
+      },
+      {
+        "image": "6.jpg",
+        "rms_px": 0.33977100253105164,
+        "mean_px": 0.2840644419193268,
+        "max_px": 1.0174329280853271,
+        "plot": "calibration_outputs/Set_B_7/reprojection_plots/6_reprojection.jpg"
+      }
+    ]
+  },
+  {
+    "set": "Set_C_11",
+    "num_images": 11,
+    "image_size": [
+      1108,
+      1477
+    ],
+    "opencv_rms_px": 0.34358049385029077,
+    "camera_matrix": [
+      [
+        1143.3860409981671,
+        0.0,
+        562.5324770831556
+      ],
+      [
+        0.0,
+        1141.3632295419343,
+        735.3511273271184
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "dist_coeffs": [
+      0.18123822100092554,
+      -0.8830687802460498,
+      0.0004962101213905616,
+      -0.0006250981790452888,
+      1.5275430084234505
+    ],
+    "per_image": [
+      {
+        "image": "0.jpg",
+        "rms_px": 0.23782707750797272,
+        "mean_px": 0.19558504223823547,
+        "max_px": 0.5957132577896118,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/0_reprojection.jpg"
+      },
+      {
+        "image": "1.jpg",
+        "rms_px": 0.3728577196598053,
+        "mean_px": 0.31574270129203796,
+        "max_px": 0.9621907472610474,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/1_reprojection.jpg"
+      },
+      {
+        "image": "2.jpg",
+        "rms_px": 0.12808215618133545,
+        "mean_px": 0.11240571737289429,
+        "max_px": 0.3337096571922302,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/2_reprojection.jpg"
+      },
+      {
+        "image": "3.jpg",
+        "rms_px": 0.34500905871391296,
+        "mean_px": 0.2805005609989166,
+        "max_px": 1.1163538694381714,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/3_reprojection.jpg"
+      },
+      {
+        "image": "4.jpg",
+        "rms_px": 0.2965072691440582,
+        "mean_px": 0.24708017706871033,
+        "max_px": 0.855704128742218,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/4_reprojection.jpg"
+      },
+      {
+        "image": "5.jpg",
+        "rms_px": 0.3767094016075134,
+        "mean_px": 0.3059315085411072,
+        "max_px": 1.2128218412399292,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/5_reprojection.jpg"
+      },
+      {
+        "image": "6.jpg",
+        "rms_px": 0.35183075070381165,
+        "mean_px": 0.2982127070426941,
+        "max_px": 1.006944179534912,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/6_reprojection.jpg"
+      },
+      {
+        "image": "7.jpg",
+        "rms_px": 0.290682852268219,
+        "mean_px": 0.22295048832893372,
+        "max_px": 0.982412576675415,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/7_reprojection.jpg"
+      },
+      {
+        "image": "8.jpg",
+        "rms_px": 0.3563620150089264,
+        "mean_px": 0.3133152723312378,
+        "max_px": 0.9001645445823669,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/8_reprojection.jpg"
+      },
+      {
+        "image": "9.jpg",
+        "rms_px": 0.5079469680786133,
+        "mean_px": 0.40494683384895325,
+        "max_px": 1.687121033668518,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/9_reprojection.jpg"
+      },
+      {
+        "image": "10.jpg",
+        "rms_px": 0.3799913227558136,
+        "mean_px": 0.3122137486934662,
+        "max_px": 1.262913703918457,
+        "plot": "calibration_outputs/Set_C_11/reprojection_plots/10_reprojection.jpg"
+      }
+    ]
+  },
+  {
+    "set": "Set_D_15",
+    "num_images": 15,
+    "image_size": [
+      1108,
+      1477
+    ],
+    "opencv_rms_px": 0.42459314510278434,
+    "camera_matrix": [
+      [
+        1146.043855340007,
+        0.0,
+        560.4690590424823
+      ],
+      [
+        0.0,
+        1143.9974346340753,
+        731.8750572295866
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "dist_coeffs": [
+      0.09839245633338392,
+      -0.25964823122424013,
+      -0.0008256494354123499,
+      -0.0008632221174645436,
+      0.2744617714386349
+    ],
+    "per_image": [
+      {
+        "image": "0.jpg",
+        "rms_px": 0.32617056369781494,
+        "mean_px": 0.2805790901184082,
+        "max_px": 0.7446258664131165,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/0_reprojection.jpg"
+      },
+      {
+        "image": "1.jpg",
+        "rms_px": 0.47649452090263367,
+        "mean_px": 0.4026017487049103,
+        "max_px": 1.3228189945220947,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/1_reprojection.jpg"
+      },
+      {
+        "image": "2.jpg",
+        "rms_px": 0.19191110134124756,
+        "mean_px": 0.16988879442214966,
+        "max_px": 0.4125591218471527,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/2_reprojection.jpg"
+      },
+      {
+        "image": "3.jpg",
+        "rms_px": 0.414940744638443,
+        "mean_px": 0.35152193903923035,
+        "max_px": 1.2524433135986328,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/3_reprojection.jpg"
+      },
+      {
+        "image": "4.jpg",
+        "rms_px": 0.35691022872924805,
+        "mean_px": 0.3051808178424835,
+        "max_px": 1.0418816804885864,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/4_reprojection.jpg"
+      },
+      {
+        "image": "5.jpg",
+        "rms_px": 0.41947758197784424,
+        "mean_px": 0.34365203976631165,
+        "max_px": 1.322322130203247,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/5_reprojection.jpg"
+      },
+      {
+        "image": "6.jpg",
+        "rms_px": 0.4293287992477417,
+        "mean_px": 0.37504804134368896,
+        "max_px": 1.128307580947876,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/6_reprojection.jpg"
+      },
+      {
+        "image": "7.jpg",
+        "rms_px": 0.3464372158050537,
+        "mean_px": 0.2887984812259674,
+        "max_px": 0.8040984869003296,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/7_reprojection.jpg"
+      },
+      {
+        "image": "8.jpg",
+        "rms_px": 0.45063871145248413,
+        "mean_px": 0.40208232402801514,
+        "max_px": 0.9397861361503601,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/8_reprojection.jpg"
+      },
+      {
+        "image": "9.jpg",
+        "rms_px": 0.5259670615196228,
+        "mean_px": 0.42231446504592896,
+        "max_px": 1.801159381866455,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/9_reprojection.jpg"
+      },
+      {
+        "image": "10.jpg",
+        "rms_px": 0.36026492714881897,
+        "mean_px": 0.3141058683395386,
+        "max_px": 1.0737769603729248,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/10_reprojection.jpg"
+      },
+      {
+        "image": "11.jpg",
+        "rms_px": 0.46192196011543274,
+        "mean_px": 0.37629571557044983,
+        "max_px": 1.6028175354003906,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/11_reprojection.jpg"
+      },
+      {
+        "image": "12.jpg",
+        "rms_px": 0.5332602858543396,
+        "mean_px": 0.3935582637786865,
+        "max_px": 2.664349317550659,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/12_reprojection.jpg"
+      },
+      {
+        "image": "13.jpg",
+        "rms_px": 0.4872511327266693,
+        "mean_px": 0.413513720035553,
+        "max_px": 1.3323006629943848,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/13_reprojection.jpg"
+      },
+      {
+        "image": "14.jpg",
+        "rms_px": 0.45761531591415405,
+        "mean_px": 0.3655557334423065,
+        "max_px": 1.6162176132202148,
+        "plot": "calibration_outputs/Set_D_15/reprojection_plots/14_reprojection.jpg"
+      }
+    ]
+  }
+]
