@@ -1,0 +1,42 @@
+\documentclass[uplatex,dvipdfmx,11pt,a4paper]{bxjsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\usepackage[haranoaji]{pxchfon}
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{Software Engineering Lesson3 Report}}
+\end{center}
+
+\vspace{1em}
+
+\begin{flushright}
+2611193 Heizo Nakai
+\end{flushright}
+
+\section*{事例の考察}
+
+\noindent 事例URL：\url{https://techblog.lycorp.co.jp/ja/20250619a}
+
+\par\medskip
+保守事例として、コミュニケーションアプリ「LINE」のiOS版において実施された「適応保守」の事例を取り上げる。
+保守対象は、トークや通話を提供するインフラ的アプリ「LINE（iOS版）」である。
+
+この事例で行われた保守は、アプリの起動、画面表示、バックグラウンド移行、終了
+といった状態変化を制御するライフサイクル管理の仕組みを、
+従来の「UIApplicationDelegate」を用いた方式から、新しい「scene-basedライフサイクル」へと移行したことである。
+その目的は、AppleによるiOSの仕様変更という「外部環境の変化」に対応することである。
+これは発生したバグを直すためではなく、将来のOSバージョンにおいても、
+ユーザーがこれまで通りLINEアプリを安定して起動・利用できる状態を維持するために実施された。
+
+この事例から私は、ソフトウェア保守とは単なるリリース後の不具合修正にとどまらないことを学んだ。
+OSアップデートといった環境の変化にシステムを適合させていく「適応保守」は、
+利用者がこれまで通り使い続けられる状態を保つために非常に重要であることを学んだ。
+
+一方で、適宜システムに変更を加え続けることは、開発側にとって非常に労力を要する作業であることも理解できた。
+iOSやAndroidといった異なるOSが存在し、それぞれのプラットフォームが実施する仕様変更に対して、
+個別に対応していかなければならない。適応保守は利用者の目には見えにくい裏側の作業ではあるが、
+サービスを安定して提供し続けるために、継続的なリソースが注ぎ込まれている大変な作業であると実感した。
+
+\end{document}
