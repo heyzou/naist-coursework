@@ -1,0 +1,316 @@
+\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{luatexja-fontspec}
+\setmainjfont{HaranoAjiMincho-Regular}
+\setsansjfont{HaranoAjiGothic-Medium}
+\linespread{1.05}\selectfont
+
+% Recommended PDF filename:
+% アルゴリズム設計論_repo3_2611193_中井平蔵.pdf
+% Example build command:
+% latexmk -lualatex -jobname=アルゴリズム設計論_repo3_2611193_中井平蔵 main.tex
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{アルゴリズム設計論 第3回レポート}}
+\end{center}
+\vspace{1em}
+
+\begin{flushright}
+提出日: \today \\
+学籍番号: 2611193 \\
+氏名: 中井 平蔵
+\end{flushright}
+
+\section*{1.}
+上側の量子ビットを第1量子ビット $q_1$、下側の量子ビットを第2量子ビット $q_2$ とする。
+また、2量子ビットの計算基底を
+
+\[
+\{\lvert 00 \rangle, \lvert 01 \rangle, \lvert 10 \rangle, \lvert 11 \rangle\}
+\]
+
+の順に並べる。
+
+示したいのは、
+
+\[
+(H \otimes H)\,\mathrm{CNOT}_{1 \to 2}\,(H \otimes H) = \mathrm{CNOT}_{2 \to 1}
+\]
+
+である。
+ここで、第1量子ビット $q_1$ を制御量子ビット、
+第2量子ビット $q_2$ を標的量子ビットとし、$q_1 = 1$ のときのみ $q_2$ を反転させる
+CNOTゲートを$\mathrm{CNOT}_{1 \to 2}$ と表す。
+また、第2量子ビット $q_2$ を制御量子ビット、
+第1量子ビット $q_1$ を標的量子ビットとし、$q_2 = 1$ のときのみ $q_1$ を反転させる
+CNOTゲートを$\mathrm{CNOT}_{2 \to 1}$ と表す。
+
+Hゲートの行列表現は、
+
+\[
+H = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+\]
+
+であるため、テンソル積 $H \otimes H$ は以下のようになる。
+
+\begin{align*}
+H \otimes H
+&= \left( \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix} \right)
+\otimes
+\left( \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix} \right) \\
+&= \frac{1}{2}
+\begin{pmatrix}
+1 \cdot
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+&
+1 \cdot
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+\\
+1 \cdot
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+&
+-1 \cdot
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix}
+\end{pmatrix} \\
+&= \frac{1}{2}
+\begin{pmatrix}
+1 & 1 & 1 & 1 \\
+1 & -1 & 1 & -1 \\
+1 & 1 & -1 & -1 \\
+1 & -1 & -1 & 1
+\end{pmatrix}
+\end{align*}
+
+また、$\mathrm{CNOT}_{1 \to 2}$ の行列表現は、
+
+\[
+\mathrm{CNOT}_{1 \to 2} =
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0
+\end{pmatrix}
+\]
+
+である。よって、
+
+\begin{align*}
+(H \otimes H)\,\mathrm{CNOT}_{1 \to 2}\,(H \otimes H)
+&= \frac{1}{4}
+\begin{pmatrix}
+1 & 1 & 1 & 1 \\
+1 & -1 & 1 & -1 \\
+1 & 1 & -1 & -1 \\
+1 & -1 & -1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+1 & 1 & 1 & 1 \\
+1 & -1 & 1 & -1 \\
+1 & 1 & -1 & -1 \\
+1 & -1 & -1 & 1
+\end{pmatrix} \\
+&=
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0
+\end{pmatrix}
+\end{align*}
+
+この行列を各計算基底に作用させると、
+第2量子ビット $q_2$ が0のときには第1量子ビット $q_1$ は変化せず、
+$q_2$ が1のときに $q_1$ が反転していることが分かる。
+
+以上より、
+
+\[
+(H \otimes H)\,\mathrm{CNOT}_{1 \to 2}\,(H \otimes H) = \mathrm{CNOT}_{2 \to 1}
+\]
+
+が成立する。したがって、
+
+\begin{center}
+\fbox{\begin{minipage}{0.9\linewidth}
+CNOTゲートの前後で2つの量子ビットのそれぞれにHゲートを作用させると、
+CNOTゲートの制御量子ビットと標的量子ビットが入れ替わり、制御方向が反転することが
+行列表現によって示された。
+\end{minipage}}
+\end{center}
+
+\section*{2.}
+\subsection*{(1)}
+Aliceは、量子ビット $A1$, $A2$ からなるEPRペア
+\[
+\lvert \Phi^+ \rangle_{A1A2}
+= \frac{1}{\sqrt{2}}
+\left(
+\lvert 00 \rangle_{A1A2} + \lvert 11 \rangle_{A1A2}
+\right)
+\]
+
+を持っている。また、Aliceの量子ビット $A3$ とBobの量子ビット $B1$ も、EPRペア
+\[
+\lvert \Phi^+ \rangle_{A3B1}
+= \frac{1}{\sqrt{2}}
+\left(
+\lvert 00 \rangle_{A3B1} + \lvert 11 \rangle_{A3B1}
+\right)
+\]
+
+を形成している。
+
+したがって、4量子ビット全体の初期状態は、
+\[
+\lvert \Psi_0 \rangle
+= \lvert \Phi^+ \rangle_{A1A2} \otimes \lvert \Phi^+ \rangle_{A3B1}
+= \frac{1}{2}
+\left(
+\lvert 0000 \rangle + \lvert 0011 \rangle + \lvert 1100 \rangle + \lvert 1111 \rangle
+\right)
+\]
+
+となる。ここでは、量子ビットの順番を $A1, A2, A3, B1$ とする。
+
+まず、$A2$ を制御量子ビット、$A3$ を標的量子ビットとするCNOTゲートを作用させる。
+\[
+\mathrm{CNOT}_{A2 \to A3}
+\]
+
+により、
+\[
+\lvert 0000 \rangle \to \lvert 0000 \rangle,\quad
+\lvert 0011 \rangle \to \lvert 0011 \rangle,\quad
+\lvert 1100 \rangle \to \lvert 1110 \rangle,\quad
+\lvert 1111 \rangle \to \lvert 1101 \rangle
+\]
+
+となる。したがって、CNOTゲート作用後の状態は、
+\[
+\lvert \Psi_1 \rangle
+= \frac{1}{2}
+\left(
+\lvert 0000 \rangle + \lvert 0011 \rangle + \lvert 1110 \rangle + \lvert 1101 \rangle
+\right)
+\]
+
+である。
+
+次に、量子ビット $A2$ にHゲートを作用させると、
+
+\begin{align*}
+\lvert \Psi_2 \rangle
+&= (I \otimes H \otimes I \otimes I)\lvert \Psi_1 \rangle \\
+&= \frac{1}{2\sqrt{2}}
+\left[
+\lvert 0000 \rangle + \lvert 0100 \rangle
++ \lvert 0011 \rangle + \lvert 0111 \rangle
++ \lvert 1010 \rangle - \lvert 1110 \rangle
++ \lvert 1001 \rangle - \lvert 1101 \rangle
+\right]
+\end{align*}
+
+となる。
+
+ここで、測定を行い $A2$, $A3$ のビットが $(m,n)$ $(m,n \in \{0,1\})$ となる場合を考える。
+
+\begin{center}
+\begingroup
+\renewcommand{\arraystretch}{1.4}
+\setlength{\tabcolsep}{14pt}
+\begin{tabular}{c c}
+\hline
+\((m,n)\) & 測定後の状態 \\
+\hline
+\((0,0)\) & $\frac{1}{2\sqrt{2}}\left(\lvert 0000 \rangle + \lvert 1001 \rangle\right)$ \\
+\((0,1)\) & $\frac{1}{2\sqrt{2}}\left(\lvert 0011 \rangle + \lvert 1010 \rangle\right)$ \\
+\((1,0)\) & $\frac{1}{2\sqrt{2}}\left(\lvert 0100 \rangle - \lvert 1101 \rangle\right)$ \\
+\((1,1)\) & $\frac{1}{2\sqrt{2}}\left(\lvert 0111 \rangle - \lvert 1110 \rangle\right)$ \\
+\hline
+\end{tabular}
+\endgroup
+\end{center}
+
+次に、$A2$, $A3$ の測定結果ごとに、残った $A1B1$ 成分を抜き出して正規化すると、
+\begin{center}
+\begingroup
+\renewcommand{\arraystretch}{1.4}
+\setlength{\tabcolsep}{16pt}
+\begin{tabular}{c c}
+\hline
+\((m,n)\) & $A1B1$ の状態（正規化後） \\
+\hline
+\((0,0)\) & $\frac{1}{\sqrt{2}}\left(\lvert 00 \rangle + \lvert 11 \rangle\right)$ \\
+\((0,1)\) & $\frac{1}{\sqrt{2}}\left(\lvert 01 \rangle + \lvert 10 \rangle\right)$ \\
+\((1,0)\) & $\frac{1}{\sqrt{2}}\left(\lvert 00 \rangle - \lvert 11 \rangle\right)$ \\
+\((1,1)\) & $\frac{1}{\sqrt{2}}\left(\lvert 01 \rangle - \lvert 10 \rangle\right)$ \\
+\hline
+\end{tabular}
+\endgroup
+\end{center}
+
+したがって、$A1$ は変化せず、$B1$ に Pauli 演算子 $\sigma_{m,n}$ を適用すると、
+\begin{center}
+\begingroup
+\renewcommand{\arraystretch}{1.4}
+\setlength{\tabcolsep}{14pt}
+\begin{tabular}{c c c}
+\hline
+\((m,n)\) & $\sigma_{m,n}$ & 最終的な出力 \\
+\hline
+\((0,0)\) & $I$ & $\frac{1}{\sqrt{2}}\left(\lvert 00 \rangle + \lvert 11 \rangle\right)$ \\
+\((0,1)\) & $X$ & $\frac{1}{\sqrt{2}}\left(\lvert 00 \rangle + \lvert 11 \rangle\right)$ \\
+\((1,0)\) & $Z$ & $\frac{1}{\sqrt{2}}\left(\lvert 00 \rangle + \lvert 11 \rangle\right)$ \\
+\((1,1)\) & $XZ$ & $\frac{1}{\sqrt{2}}\left(\lvert 00 \rangle + \lvert 11 \rangle\right)$ \\
+\hline
+\end{tabular}
+\endgroup
+\end{center}
+
+よって、$A1B1$ の出力状態は必ず
+\begin{center}
+\fbox{$\displaystyle \frac{1}{\sqrt{2}}\left(\lvert 00 \rangle + \lvert 11 \rangle\right)$}
+\end{center}
+
+\subsection*{(2)}
+\begin{center}
+\fbox{\strut エンタングルメントスワッピング\strut}
+\end{center}
+
+\end{document}

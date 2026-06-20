@@ -1,0 +1,28 @@
+# Fdb version 4
+["pdflatex"] 1781702035.10962 "main.tex" "presentation2_script.pdf" "presentation2_script" 1781702035.36341 0
+  "/etc/texmf/web2c/texmf.cnf" 1777527148.4352 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/hnakai/.texlive2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1778809970.73339 178453 21bf4e7e9e1b38fe21607791bf66f6fe ""
+  "/home/hnakai/texmf/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
+  "/home/hnakai/texmf/tex/latex/base/article.cls" 1705352648 20144 147463a6a579f4597269ef9565205cfe ""
+  "/home/hnakai/texmf/tex/latex/base/fontenc.sty" 1705352648 5119 a04a8b68ab4f6ce800a41f7f8012a10e ""
+  "/home/hnakai/texmf/tex/latex/base/inputenc.sty" 1705352648 5048 425739d70251273bf93e3d51f3c40048 ""
+  "/home/hnakai/texmf/tex/latex/base/size12.clo" 1705352648 8449 f07039d8e4e89f21078d9b5137579bfc ""
+  "/home/hnakai/texmf/tex/latex/graphics/keyval.sty" 1654720880 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
+  "/home/hnakai/texmf/tex/latex/l3backend/l3backend-pdftex.def" 1708427688 30006 3d512c0edd558928ddea1690180ef77e ""
+  "/tmp/texfonts/pk/ljfour/jknappen/ec/ecrm1200.600pk" 1781678983.67759 28416 4c361147b399ab4996b87640be0cb3cc ""
+  "/tmp/texfonts/pk/ljfour/jknappen/ec/ecrm2074.600pk" 1781678983.9788 53712 eb0a6fe8a2e01cbec28b7d38ab7a8401 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm" 1136768653 3584 f80ddd985bd00e29e9a6047ebd9d4781 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm2074.tfm" 1136768653 3584 8e2870ec7aa9776f59654942b0923f51 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty" 1644112042 7237 bdd120a32c8fdb4b433cf9ca2e7cd98a ""
+  "/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty" 1572645307 1057 525c2192b5febbd8c1f662c9468335bb ""
+  "/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty" 1578002852 41601 9cf6c5257b1bc7af01a58859749dd37a ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1777527164 6898251 1c9e65a8e3457837a900f5427760095c ""
+  "main.tex" 1781702020.54518 1992 053f5a88176a17c18f282f5ff3a344dd ""
+  "presentation2_script.aux" 1781702035.26341 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  (generated)
+  "presentation2_script.aux"
+  "presentation2_script.log"
+  "presentation2_script.pdf"
+  (rewritten before read)

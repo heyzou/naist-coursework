@@ -1,0 +1,63 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=22mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+\linespread{1.15}\selectfont
+
+\begin{document}
+
+\begin{center}
+{\LARGE Presentation 2 Script}
+\end{center}
+
+Hello everyone.
+
+My name is Heizo Nakai, and my presenter number is 55.
+
+Today, I'd like to introduce my research theme: ``Visual Noise Cancelling VR device.''
+
+Let me start with a simple question.
+Could you concentrate on your work at a cluttered desk like this?
+
+I think many people would feel distracted.
+I feel the same way.
+
+Then, how about this situation?
+Here, the visual noise has been removed.
+I think this looks like a much better environment for concentration.
+
+My goal is to enable users to remove visual noise through a VR device.
+
+Next, I will explain the detailed process for visual noise cancellation.
+
+The process consists of two main steps.
+
+The first step is object removal.
+The user selects the object they want to remove,
+ and the system removes it from the scene.
+The second step is inpainting the removed area using AI.
+This is similar to Google's ``Magic Eraser'' function.
+
+I aim to implement this kind of processing on a VR device.
+For a natural user experience, it must run in real time.
+
+However, VR devices have limited computational resources and battery capacity.
+
+Therefore, the system requires high-speed processing and low power consumption
+under these constraints.
+
+Finally, I will explain my approach to addressing these challenges.
+
+I am considering designing a dedicated accelerator.
+
+First, I will analyze the computational cost of each processing step.
+Then, I will identify the bottleneck, which is the most time-consuming part of the pipeline.
+
+Based on this analysis, I will design a dedicated accelerator for the bottleneck process.
+Through this approach, I aim to reduce both processing time and power consumption.
+
+Thank you for listening.
+
+\end{document}

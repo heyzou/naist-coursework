@@ -1,0 +1,33 @@
+\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\usepackage{luatexja-fontspec}
+\setmainjfont{HaranoAjiMincho-Regular}
+\setsansjfont{HaranoAjiGothic-Medium}
+\linespread{1.05}\selectfont
+
+\begin{document}
+\begin{center}
+{\LARGE \textbf{Software Engineering Lesson4 Report}}
+\end{center}
+\vspace{1em}
+\begin{flushright}
+2611193 Heizo Nakai
+\end{flushright}
+
+私は、生成AIはこれまでコストなどの面で難しかったモダナイゼーションを、短期的に見れば、
+より低コストで進められるものに変えると考える。
+一方で、AIが生成したコードへの理解が不十分なまま開発が進むと、保守や改修の段階で新たな負債が蓄積し、
+長期的にはかえってコストが増加する可能性があると考える。
+AIによるモダナイゼーションの課題は、開発者が理解したつもりになりやすい点にあると考える。
+自分で手を動かしてコードを書いたときの理解度と、
+AIが生成したコードを読んだり評価したりして理解したと感じる理解度には、大きな差がある。
+自分で一から書けるほどの理解がなければ、AIが生成したコードを適切に評価・監査することは難しいと思う。
+その結果、新たな技術的負債という課題が生まれる可能性がある。
+この課題に対処するためには、AIが生成したコードを確認するだけでは不十分である。
+開発者自身が、コードの一部でもよいので、自分の頭で考え、一から設計・実装する過程が必要だと考える。
+実際に自分で書く過程で、レビューしているだけでは気づきにくいエラーケースなどに気づけるからである。
+自分で書ける水準まで理解して初めて、そのようなテストケースを考慮することができ、
+コードの品質を高めることができると考える。そのため、生成AIによってコードを効率的に生成できる時代だからこそ、
+開発者自身が手を動かし、自ら実装できるレベルまで理解を深めることが重要になると考える。
+\end{document}
