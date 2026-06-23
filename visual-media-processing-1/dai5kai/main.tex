@@ -1,0 +1,103 @@
+\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{luatexja-fontspec}
+\setmainjfont{HaranoAjiMincho-Regular}
+\setsansjfont{HaranoAjiGothic-Medium}
+\linespread{1.05}\selectfont
+
+% Recommended PDF filename:
+% 2611193_HeizoNakai_visual_media_processing1_dai5kai.pdf
+% Example build command:
+% latexmk -g -lualatex -jobname=2611193_HeizoNakai_visual_media_processing1_dai5kai main.tex
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{視覚メディア処理I 第5回レポート}}
+\end{center}
+\vspace{1em}
+
+\begin{flushright}
+提出日: \today \\
+学籍番号: 2611193 \\
+氏名: 中井 平蔵
+\end{flushright}
+
+\section*{ORBによる局所特徴記述}
+
+本レポートでは、局所特徴記述手法の一つであるORB（Oriented FAST and Rotated BRIEF）について説明する。
+ORBは、特徴点検出手法であるFASTと、バイナリ特徴記述手法であるBRIEFを組み合わせ、さらに回転に対する頑健性を加えた手法である。
+SIFTやSURFと比較して計算量とメモリ使用量が小さく、リアルタイム処理に適していることが大きな特徴である。
+
+ORBの処理は、主に特徴点検出、方向推定、特徴記述の三段階から構成される。
+
+最初に、FASTを用いて画像中の特徴点を検出する。
+FASTでは、注目画素の周囲に配置された円周上の16画素を調べ、連続する複数の画素が注目画素より十分に明るい、または暗い場合、その画素をコーナーとして検出する。
+画素値の大小比較を中心とした単純な処理であるため、画像微分などを用いる特徴点検出手法よりも高速に計算できる。
+ただし、FASTだけでは特徴点の重要度を適切に評価できないため、ORBではHarrisコーナー応答などを用いて特徴点を順位付けし、応答値の大きい点を選択する。
+また、画像を段階的に縮小した画像ピラミッドの各階層で特徴点を検出することで、ある程度のスケール変化にも対応している。
+
+次に、検出した特徴点ごとに方向を推定する。
+通常のFASTは特徴点の位置だけを検出し、その方向を求めない。
+そのため、画像が回転すると特徴点周辺の画素配置が変化し、同じ特徴点であっても異なる特徴記述子が生成される可能性がある。
+ORBでは、特徴点周辺の画素の輝度値を質量とみなし、その重心を求める強度重心法を使用する。
+画像モーメントを
+
+\[
+m_{pq}=\sum_{x,y} x^p y^q I(x,y)
+\]
+
+とすると、特徴点の方向は
+
+\[
+\theta=\operatorname{atan2}(m_{01},m_{10})
+\]
+
+によって求められる。
+これは、特徴点の中心から輝度分布の重心へ向かう方向を、その特徴点の主方向とする方法である。
+
+最後に、Rotated BRIEFを用いて特徴記述子を生成する。
+BRIEFでは、特徴点周辺に複数の画素対を設定し、それぞれの輝度値を比較する。
+二つの画素位置を $(x_i)$、$(y_i)$ とすると、各ビットは
+
+\[
+\tau(p;x_i,y_i)=
+\begin{cases}
+1 & I(x_i)<I(y_i) \\
+0 & I(x_i)\geq I(y_i)
+\end{cases}
+\]
+
+として求められる。
+この比較を多数の画素対について行い、結果を0と1からなるバイナリ列として並べる。
+一般的なORB記述子は256ビットであり、一つの特徴量を32バイトで表現できる。
+
+通常のBRIEFは比較する画素位置が固定されているため、画像の回転に弱い。
+そこでORBでは、先に推定した方向 $\theta$ に合わせて画素対の配置を回転させる。
+これにより、画像が回転した場合でも、特徴点を基準としてほぼ同じ位置関係にある画素を比較できる。
+また、ORBでは、比較結果の分散が大きく、互いの相関が小さい画素対を選択することで、記述子の識別性能を高めている。
+
+ORBの大きな長所は、特徴記述子がバイナリ形式であることである。
+SIFTなどの浮動小数点ベクトルでは、特徴量間の比較にユークリッド距離を用いる。
+一方、ORBでは、異なるビットの数を数えるハミング距離を用いる。
+ハミング距離はXOR演算とビットカウントによって計算できるため、CPU上で非常に高速に処理できる。
+また、記述子のサイズが小さいため、メモリ使用量だけでなく、キャッシュミスやデータ転送量も削減できる。
+このようにORBは、特徴点検出、特徴記述、特徴量比較の各段階で計算コストを抑えている。
+
+一方、ORBには、大きなスケール変化、視点変化、照明変化に対する頑健性がSIFTなどと比較して低いという短所がある。
+バイナリ特徴量は局所的な画素値の大小関係に基づくため、画像の見え方が大きく変化すると、特徴記述子のビットも変化しやすい。
+また、画像ピラミッドによってスケール変化に対応しているものの、スケール空間を厳密に構築するSIFTほどのスケール不変性は持たない。
+
+以上より、ORBは、FASTによる高速な特徴点検出と、回転に対応したBRIEFによるバイナリ特徴記述を組み合わせた手法である。
+特に、バイナリ記述子とハミング距離を使用することで、計算量、メモリ使用量、データ転送量を削減できる点が特徴的である。
+そのため、Visual SLAM、ロボットの自己位置推定、拡張現実、画像マッチングなど、リアルタイム性と計算資源の制約が重要となる用途に適した局所特徴記述手法である。
+
+\section*{参考文献}
+
+E. Rublee, V. Rabaud, K. Konolige, and G. Bradski, ``ORB: An Efficient Alternative to SIFT or SURF,''
+Proceedings of the IEEE International Conference on Computer Vision, pp. 2564--2571, 2011.
+
+\end{document}
