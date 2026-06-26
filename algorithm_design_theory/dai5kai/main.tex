@@ -1,0 +1,115 @@
+\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{luatexja-fontspec}
+\setmainjfont{HaranoAjiMincho-Regular}
+\setsansjfont{HaranoAjiGothic-Medium}
+\linespread{1.05}\selectfont
+
+% Recommended PDF filename:
+% アルゴリズム設計論_repo5_2611193_中井平蔵.pdf
+% Example build command:
+% latexmk -lualatex -jobname=アルゴリズム設計論_repo5_2611193_中井平蔵 main.tex
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{アルゴリズム設計論 第5回レポート}}
+\end{center}
+\vspace{1em}
+
+\begin{flushright}
+提出日: \today \\
+学籍番号: 2611193 \\
+氏名: 中井 平蔵
+\end{flushright}
+
+\medskip
+問題文より、与えられた品物の重さと価値は以下の表であり、ナップサックの容量は \(15\) である。
+
+\[
+\renewcommand{\arraystretch}{1.2}
+\begin{array}{c|cccccc}
+\hline
+\text{品物番号} & 1 & 2 & 3 & 4 & 5 & 6 \\
+\hline
+\text{重さ} & 8 & 3 & 6 & 1 & 10 & 5 \\
+\text{価値} & 1 & 4 & 2 & 3 & 1 & 7 \\
+\hline
+\end{array}
+\]
+
+F(h, g) を、品物 \(1\) から品物 \(h\) までを使用し、容量 \(g\) 以下で得られる価値の最大値と定義する。品物 \(h\) の重さを \(w_h\)、価値を \(v_h\) とする。
+
+\begin{itemize}
+\item 品物 \(h\) の重さが容量 \(g\) を超える場合：
+\[
+F(h, g) = F(h - 1, g)
+\]
+\item 品物 \(h\) を入れることができる場合：
+\[
+F(h, g) = \max\bigl(v_h + F(h - 1, g - w_h),\; F(h - 1, g)\bigr)
+\]
+\end{itemize}
+
+これを動的計画法の表にまとめると、次のようになる。
+
+\[
+\renewcommand{\arraystretch}{1.2}
+\begin{array}{c|cccccccccccccccc}
+\hline
+\shortstack[c]{\(g\)} & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 \\
+\hline
+F(0,g) & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+F(1,g) & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+F(2,g) & 0 & 0 & 0 & 4 & 4 & 4 & 4 & 4 & 4 & 4 & 4 & 5 & 5 & 5 & 5 & 5 \\
+F(3,g) & 0 & 0 & 0 & 4 & 4 & 4 & 4 & 4 & 4 & 6 & 6 & 6 & 6 & 6 & 6 & 6 \\
+F(4,g) & 0 & 3 & 3 & 4 & 7 & 7 & 7 & 7 & 7 & 7 & 9 & 9 & 9 & 9 & 9 & 9 \\
+F(5,g) & 0 & 3 & 3 & 4 & 7 & 7 & 7 & 7 & 7 & 7 & 9 & 9 & 9 & 9 & 9 & 9 \\
+F(6,g) & 0 & 3 & 3 & 4 & 7 & 7 & 10 & 10 & 11 & 14 & 14 & 14 & 14 & 14 & 14 & 16 \\
+\hline
+\end{array}
+\]
+
+表より、\(F(6, 15) = 16\) であるため、最大価値は \(16\) である。
+
+表の右下 \(F(6, 15)\) から逆にたどることで、価値が最大となる品物の組み合わせを確認できる。
+
+\begin{enumerate}
+\item \(F(6, 15) = 16\)、\(F(5, 15) = 9\) なので、品物6を選ぶ。
+
+残り容量は
+\[
+15 - 5 = 10
+\]
+
+\item \(F(5, 10) = F(4, 10) = 9\) なので、品物5は選ばない。
+
+\item \(F(4, 10) = 9\)、\(F(3, 10) = 6\) なので、品物4を選ぶ。
+
+残り容量は
+\[
+10 - 1 = 9
+\]
+
+\item \(F(3, 9) = 6\)、\(F(2, 9) = 4\) なので、品物3を選ぶ。
+
+残り容量は
+\[
+9 - 6 = 3
+\]
+
+\item \(F(2, 3) = 4\)、\(F(1, 3) = 0\) なので、品物2を選ぶ。
+
+残り容量は
+\[
+3 - 3 = 0
+\]
+\end{enumerate}
+
+したがって、選択した品物は \fbox{\(\{2, 3, 4, 6\}\)}、合計重量は
+\(3 + 6 + 1 + 5 = \fbox{\(15\)}\)、合計価値は \fbox{\(16\)} である。
+
+\end{document}
