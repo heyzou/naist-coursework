@@ -1,0 +1,123 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{url}
+\usepackage[left=22mm,right=22mm,top=25mm,bottom=25mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\linespread{1.05}\selectfont
+
+% Recommended PDF filename:
+% 2611193_HeizoNakai_visual_media_processing1_dai6kai_en.pdf
+% Example build command:
+% latexmk -g -lualatex -jobname=2611193_HeizoNakai_visual_media_processing1_dai6kai_en main_en.tex
+
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{Visual Media Processing I Report 6}}
+\end{center}
+\vspace{1em}
+
+\begin{flushright}
+Submission date: \today \\
+Student ID: 2611193 \\
+Name: Heizo Nakai
+\end{flushright}
+
+\subsection*{1. Design Requirements for AR Markers}
+
+\subsubsection*{1.1 Detectability in an Image}
+
+Because identification and pose estimation cannot proceed unless the AR marker is first detected in the image, an AR marker must have a shape that is readily detectable against the background.
+A high-contrast black-and-white border makes the marker outline easier to detect even in a complex background.
+
+\subsubsection*{1.2 Identifiable AR Marker ID}
+
+Because different AR contents must be associated with different AR markers, each AR marker needs information that allows it to be distinguished from the others.
+Different IDs can be assigned by using internal dot arrangements, black-and-white patterns, characters, or symbols.
+
+\subsubsection*{1.3 Determinable AR Marker Orientation}
+
+To associate the marker orientation observed in the image with its actual up, down, left, and right directions, an AR marker must allow its orientation to be identified uniquely even after rotation.
+For this reason, the internal pattern should not be rotationally symmetric.
+
+\subsubsection*{1.4 Feature Points for Camera Pose Estimation}
+
+Because camera pose must be estimated, points with known positions on the AR marker must be matched with points detected in the image.
+For example, square markers use their four corners, while circular markers use the circumference, center, or points in the internal pattern.
+
+\subsection*{2. Types of AR Markers}
+
+\subsubsection*{2.1 AR Marker Combining a Square Frame and an Internal Pattern}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.68\linewidth]{/Users/nakaiheizou/Desktop/スクリーンショット 2026-06-29 17.20.32.png}
+\caption{Example of an AR marker combining a square frame and an internal pattern}
+\label{fig:square-pattern-marker}
+\end{figure}
+
+\begin{itemize}
+\item Detection in an image: The outer frame makes the square easier to detect.
+\item ID identification: Different internal patterns can be used to distinguish IDs.
+\item Orientation determination: An asymmetric layout makes it possible to determine the rotation direction.
+\item Camera pose estimation: The four corners can be used as corresponding points, so the accuracy is high.
+\end{itemize}
+
+\subsubsection*{2.2 AR Marker Combining a Square Frame and Characters or Symbols}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.36\linewidth]{/Users/nakaiheizou/Desktop/スクリーンショット 2026-06-29 17.20.38.png}
+\caption{Example of an AR marker with a character inside a square frame}
+\label{fig:square-text-marker}
+\end{figure}
+
+\begin{itemize}
+\item Detection in an image: The outer frame makes the square easier to detect.
+\item ID identification: The character or symbol itself can be used as the ID.
+\item Orientation determination: The asymmetry of the character can be used.
+\item Camera pose estimation: The four corners can be used, but ID recognition depends on how clearly the character appears.
+\end{itemize}
+
+\subsubsection*{2.3 AR Marker Combining a Circular Shape and an Internal Pattern}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.80\linewidth]{/Users/nakaiheizou/Desktop/スクリーンショット 2026-06-29 17.20.52.png}
+\caption{Example of an AR marker combining a circular outline and an internal pattern}
+\label{fig:circle-marker}
+\end{figure}
+
+\begin{itemize}
+\item Detection in an image: The circular outline makes the marker region easier to detect.
+\item ID identification: The internal pattern is used for identification.
+\item Orientation determination: The outline alone is not sufficient, so asymmetry in the internal pattern is necessary.
+\item Camera pose estimation: The center and elliptical shape can be used, but clear corresponding points are harder to obtain than with a square marker.
+\end{itemize}
+
+\subsection*{3. Comparison of Each Method}
+
+\begin{itemize}
+\item Square frame + internal pattern
+  \begin{itemize}
+  \item Advantage: The four corners can be used as clear corresponding points, enabling high-accuracy pose estimation. In addition, because the method mainly detects the square outline, the computational cost can be kept low and it is suitable for fast processing. The marker can be used simply by printing it and attaching it to a flat surface, so installation is also easy.
+  \item Disadvantage: If part of the outer frame or corners is occluded, detection accuracy tends to decrease. In addition, when the marker is captured from a long distance or is strongly tilted relative to the camera, its shape is distorted and recognition performance decreases.
+  \end{itemize}
+\item Square frame + characters or symbols
+  \begin{itemize}
+  \item Advantage: The square outer frame enables stable detection of the marker region. Furthermore, characters or symbols can be used as IDs, making the marker identifiable not only by machines but also by humans.
+  \item Disadvantage: Because characters or symbols must be recognized, the computational cost increases compared with methods that use only internal patterns. It is also susceptible to low resolution, image blur, and lighting changes, so characters or symbols that are easy to distinguish from each other must be selected.
+  \end{itemize}
+\item Circular shape + internal pattern
+  \begin{itemize}
+  \item Advantage: Because the outer shape of a circle changes little under rotation, it is relatively robust to marker rotation. It is also tolerant of slight image blur and is suitable for installation on circular or rotating objects.
+  \item Disadvantage: Because it is difficult to obtain clear corresponding points like the four corners of a square, additional design is required for pose estimation. In addition, a circle may be observed as an ellipse during imaging, so processing for detecting circles or ellipses is necessary.
+  \end{itemize}
+\end{itemize}
+
+\end{document}
